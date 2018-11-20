@@ -1,0 +1,19 @@
+a:2:{s:9:"nom_cache";s:38:"adb106fa25b6feaa231b2102df2bbf1f.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_0a109c5a6be58a6cea0901e1286fc6e2";s:6:"source";s:36:"squelettes-dist/inclure/recents.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:1:{s:5:"cache";s:38:"adb106fa25b6feaa231b2102df2bbf1f.cache";}s:7:"entetes";a:1:{s:12:"X-Spip-Cache";i:86400;}s:5:"duree";i:0;s:5:"texte";s:561:"
+<div class="menu menu_articles" id="articles_recents">
+	<h2 class="offscreen">Articles les plus récents</h2>
+	<a name='pagination_articles' id='pagination_articles'></a>
+	<ul>
+		
+		<li dir="ltr" class="hentry clearfix text-left">
+			
+			<h3 class="h2 entry-title"><a href="spip.php?article1" rel="bookmark">Sujet test</a></h3>
+			<small><abbr class="published" title="2018-10-12T14:02:01Z">12 octobre</abbr>, par  darkarrow</small>
+			<div class="introduction entry-content">
+<p>&nbsp;:))))))))))</p>
+</div>
+		</li>
+		
+	</ul>
+	
+</div><!--#articles_recents-->
+";s:5:"notes";s:0:"";s:8:"contexte";a:5:{s:4:"date";s:19:"2018-10-26 12:13:26";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 12:13:26";s:18:"date_redac_default";b:1;s:4:"lang";s:2:"fr";}s:12:"lastmodified";i:1540556006;s:2:"gz";b:0;s:3:"sig";i:2610098480;}}

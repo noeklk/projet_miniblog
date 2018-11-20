@@ -1,0 +1,71 @@
+a:2:{s:9:"nom_cache";s:38:"624dbabbb1340a96c9d9422540d691e7.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_4d9ca10c89b121cfbd7304c35b2d671e";s:6:"source";s:33:"squelettes-dist/inclure/head.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:1:{s:5:"cache";s:38:"624dbabbb1340a96c9d9422540d691e7.cache";}s:7:"entetes";a:1:{s:12:"X-Spip-Cache";i:86400;}s:5:"duree";i:0;s:5:"texte";s:3519:"
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<link rel="alternate" type="application/rss+xml" title="Syndiquer tout le site" href="spip.php?page=backend" />
+
+   
+<link rel="stylesheet" href="squelettes-dist/css/reset.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/clear.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/font.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/links.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/typo.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/media.css" type="text/css" />
+<link rel="stylesheet" href="squelettes-dist/css/form.css" type="text/css" />
+
+<link rel="stylesheet" href="squelettes-dist/css/layout.css" type="text/css" />
+
+
+<link rel="stylesheet" href="squelettes-dist/css/spip.css" type="text/css" />
+<script type="text/javascript">/* <![CDATA[ */
+var box_settings = {tt_img:true,sel_g:"#documents_portfolio a[type='image/jpeg'],#documents_portfolio a[type='image/png'],#documents_portfolio a[type='image/gif']",sel_c:".mediabox",trans:"elastic",speed:"200",ssSpeed:"2500",maxW:"90%",maxH:"90%",minW:"400px",minH:"",opa:"0.9",str_ssStart:"Diaporama",str_ssStop:"Arrêter",str_cur:"{current}/{total}",str_prev:"Précédent",str_next:"Suivant",str_close:"Fermer",splash_url:""};
+var box_settings_splash_width = "600px";
+var box_settings_splash_height = "90%";
+var box_settings_iframe = true;
+/* ]]> */</script>
+<!-- insert_head_css --><link rel="stylesheet" href="plugins-dist/mediabox/colorbox/black-striped/colorbox.css" type="text/css" media="all" /><link rel='stylesheet' type='text/css' media='all' href='plugins-dist/porte_plume/css/barre_outils.css?1521044879' />
+<link rel='stylesheet' type='text/css' media='all' href='local/cache-css/cssdyn-css_barre_outils_icones_css-fd849b2b.css?1540556006' />
+
+
+
+<link rel="stylesheet" href="squelettes-dist/css/theme.css" type="text/css" />
+
+
+
+
+
+<script src="prive/javascript/jquery.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery-migrate-3.0.1.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.form.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.autosave.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.placeholder-label.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/ajaxCallback.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/js.cookie.js?1521044839" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.cookie.js?1521044839" type="text/javascript"></script>
+<!-- insert_head -->
+	<script src="plugins-dist/mediabox/javascript/jquery.colorbox.js?1521044878" type="text/javascript"></script>
+	<script src="plugins-dist/mediabox/javascript/spip.mediabox.js?1521044878" type="text/javascript"></script><script type='text/javascript' src='plugins-dist/porte_plume/javascript/jquery.markitup_pour_spip.js?1521044879'></script>
+<script type='text/javascript' src='plugins-dist/porte_plume/javascript/jquery.previsu_spip.js?1521044879'></script>
+<script type='text/javascript' src='local/cache-js/jsdyn-javascript_porte_plume_start_js-1b244424.js?1540556007'></script>
+
+
+
+
+
+
+<meta name="generator" content="SPIP 3.2.1 [23954]" />
+
+
+
+
+
+<meta name="robots" content="none" />
+";s:5:"notes";s:0:"";s:8:"contexte";a:6:{s:6:"robots";s:4:"none";s:4:"lang";s:2:"fr";s:4:"date";s:19:"2018-10-26 13:29:31";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 13:29:31";s:18:"date_redac_default";b:1;}s:12:"lastmodified";i:1540560571;s:2:"gz";b:0;s:3:"sig";i:2139784809;}}

@@ -1,0 +1,34 @@
+a:2:{s:9:"nom_cache";s:38:"7c70ff97ebc18e34196b566e5edd3b74.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_9bbbbde83763b27c9cdbdcce4ea5821e";s:6:"source";s:74:"../plugins/auto/skeleditor/v3.0.1/prive/style_prive_plugin_skeleditor.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:1:{s:5:"cache";s:38:"7c70ff97ebc18e34196b566e5edd3b74.cache";}s:7:"entetes";a:5:{s:12:"X-Spip-Cache";s:6:"360000";s:13:"Cache-Control";s:14:"max-age=360000";s:15:"X-Spip-Statique";s:3:"oui";s:12:"Content-Type";s:29:"text/css; charset=iso-8859-15";s:4:"Vary";s:15:"Accept-Encoding";}s:5:"duree";i:360000;s:5:"texte";s:1186:"
+.formulaire_squelette .actions {padding:2px;overflow:hidden;position: absolute;right: 0;top:0;margin-top: -30px;}
+.formulaire_squelette .actions .add {float:left;}
+.formulaire_squelette .actions .context {float:right;}
+.formulaire_squelette .infos {float:right;}
+.formulaire_squelette .rename {display:block;padding:2px 4px;}
+.formulaire_squelette .rename span {font-weight:bold;}
+.formulaire_squelette .rename a {display:block;float:right;}
+.formulaire_squelette textarea {padding:5px;}
+.formulaire_squelette textarea.readonly {background:#eee;color:#666;}
+
+.skeleditor #arbo .dir {
+	line-height: 12px;
+	border:1px solid #ededed;
+	padding:4px;
+	margin:4px 0;
+}
+.skeleditor #arbo .dir.closed { display:none;}
+
+.skeleditor #arbo .fichier {display:block;padding:2px 1px;}
+.skeleditor #arbo .on {background-color: #ff6;}
+.skeleditor #arbo .readonly {opacity: .4;}
+
+.skeleditor #navigation a.retour {display:block;padding-bottom:3px;}
+.skeleditor #navigation a.retour span {font-size:.81em;}
+
+.skeleditor #navigation #arbo .titrem {
+	text-align: left;
+	margin-bottom: 0;
+	padding-top: .2em;
+	padding-bottom: .2em;
+}
+.skeleditor #navigation #arbo .titrem img {float:left;margin-right:4px;}
+";s:5:"notes";s:0:"";s:8:"contexte";a:25:{s:1:"v";s:5:"22653";s:1:"p";s:4:"2e3b";s:6:"themes";s:4:"spip";s:3:"ltr";s:4:"left";s:4:"md5b";s:32:"5fb4088f078f69cd40f9e38730c681eb";s:14:"couleur_claire";s:6:"C4C4DD";s:14:"couleur_foncee";s:6:"8F8FBD";s:4:"lang";s:2:"fr";s:4:"date";s:19:"2018-10-26 12:13:40";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 12:13:40";s:18:"date_redac_default";b:1;s:6:"claire";s:7:"#C4C4DD";s:6:"foncee";s:7:"#8F8FBD";s:4:"left";s:4:"left";s:5:"right";s:5:"right";s:3:"rtl";s:0:"";s:3:"dir";s:3:"ltr";s:9:"font-size";s:8:"0.8125em";s:11:"line-height";s:7:"1.385em";s:13:"margin-bottom";s:7:"1.385em";s:11:"text-indent";s:4:"50px";s:11:"font-family";s:28:"Helvetica, Arial, sans-serif";s:16:"background-color";s:7:"#F8F7F3";s:5:"color";s:7:"#000000";}s:12:"lastmodified";i:1540556020;s:2:"gz";b:0;s:3:"sig";i:1052973930;}}

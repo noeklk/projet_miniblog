@@ -1,0 +1,4 @@
+a:2:{s:9:"nom_cache";s:38:"7f3fafc49ab7a6ac1e11962392625418.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_f5cc9f2fdff9fd4e89c036f1c622a217";s:6:"source";s:35:"squelettes-dist/inclure/header.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:1:{s:5:"cache";s:38:"7f3fafc49ab7a6ac1e11962392625418.cache";}s:7:"entetes";a:1:{s:12:"X-Spip-Cache";i:86400;}s:5:"duree";i:0;s:5:"texte";s:163:"<div class="clearfix header">
+	<strong class="h1 spip_logo_site"><a rel="start home" href="http://localhost/spip/" title="Accueil">DWM NOEKLK</a></strong>
+	
+</div>";s:5:"notes";s:0:"";s:8:"contexte";a:5:{s:4:"lang";s:2:"fr";s:4:"date";s:19:"2018-10-26 13:29:31";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 13:29:31";s:18:"date_redac_default";b:1;}s:12:"lastmodified";i:1540560571;s:2:"gz";b:0;s:3:"sig";i:951536762;}}

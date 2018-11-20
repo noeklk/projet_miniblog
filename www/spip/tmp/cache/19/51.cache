@@ -1,0 +1,9 @@
+a:2:{s:9:"nom_cache";s:38:"1951a7fe5a197e362323aded4a50c97d.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_2d8c5cfd6d5ff8d36e2455c5acc32c01";s:6:"source";s:32:"squelettes-dist/inclure/nav.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:1:{s:5:"cache";s:38:"1951a7fe5a197e362323aded4a50c97d.cache";}s:7:"entetes";a:1:{s:12:"X-Spip-Cache";i:86400;}s:5:"duree";i:0;s:5:"texte";s:151:"
+<div class="nav clearfix  none" id="nav">
+	<ul>
+		
+		<li class="nav-item  first  last"><a href="spip.php?rubrique1">Accueil</a></li>
+		
+	</ul>
+</div>
+";s:5:"notes";s:0:"";s:8:"contexte";a:5:{s:4:"date";s:19:"2018-10-26 12:13:26";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 12:13:26";s:18:"date_redac_default";b:1;s:4:"lang";s:2:"fr";}s:12:"lastmodified";i:1540556006;s:2:"gz";b:0;s:3:"sig";i:4280953641;}}

@@ -1,0 +1,39 @@
+<INCLURE{fond=inclure/tete}>
+
+<INCLURE{fond=inclure/header}>
+
+<INCLURE{fond=inclure/nav}>
+
+
+<!-- Main -->
+<div id="main">
+
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+
+<!-- First Section -->
+<section id="first" class="main special">
+<header class="major">
+									<h2>#TITRE</h2>
+</header>
+	<ul class="features">
+<BOUCLE_art(ARTICLES){id_rubrique}>
+<li>
+<span class="icon major style1 fa-code"></span>
+<h3>#TITRE</h3>
+<footer class="major">
+	<ul class="actions special">
+<li><a href="#URL_ARTICLE" class="button">En savoir plus</a></li>
+</ul>
+</footer>
+
+</li>
+</BOUCLE_art>
+        </ul>
+</section>
+
+</BOUCLE_rub>
+
+</div>
+
+<INCLURE{fond=inclure/footer}>
+<INCLURE{fond=inclure/pied}>

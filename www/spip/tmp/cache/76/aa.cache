@@ -1,0 +1,9 @@
+a:2:{s:9:"nom_cache";s:38:"76aa95e594aba28af13c707aabc9f142.cache";s:6:"valeur";a:12:{s:9:"squelette";s:37:"html_e33636cc23758c210fbbc06a03090832";s:6:"source";s:37:"../prive/squelettes/inclure/pied.html";s:11:"process_ins";s:4:"html";s:11:"invalideurs";a:2:{s:5:"cache";s:38:"b3ccee68f7f5492eb1fb32518dfa2fa7.cache";s:7:"session";s:8:"46c77e06";}s:7:"entetes";a:1:{s:12:"X-Spip-Cache";s:5:"86400";}s:5:"duree";i:86400;s:5:"texte";s:634:"<div id='copyright'>
+	
+	<b>SPIP 3.2.1 [<a href='http://core.spip.net/projects/spip/repository/revisions/23954' target="_blank" rel="noopener noreferrer">23954</a>]</b>  est un logiciel libre distribué <a href='http://localhost/spip/ecrire/?exec=aide&amp;aide=licence&amp;var_lang=fr' class="aide popin">sous licence GPL</a>.<br /> + écran de sécurité 1.3.6
+	
+	<p>Pour plus d’informations, voir le site <a href="https://www.spip.net/fr">https://www.spip.net/fr</a>.</p>
+</div>
+<noscript>
+<div style='display:none;'><img src='http://localhost/spip/ecrire/?exec=test_ajax&amp;js=-1' width='1' height='1' alt='' /></div></noscript>
+";s:5:"notes";s:0:"";s:8:"contexte";a:5:{s:4:"lang";s:2:"fr";s:4:"date";s:19:"2018-10-26 13:51:20";s:12:"date_default";b:1;s:10:"date_redac";s:19:"2018-10-26 13:51:20";s:18:"date_redac_default";b:1;}s:12:"lastmodified";i:1540561879;s:2:"gz";b:0;s:3:"sig";i:245449657;}}
