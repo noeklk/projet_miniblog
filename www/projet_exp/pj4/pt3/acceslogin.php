@@ -48,40 +48,16 @@ font-size: 50px;
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
- <form id="log" action="login.php" method="POST">
+<form id="log" action="article.php" method="POST">
 		
-        <input class="btn btn-outline-primary" type="submit" value="login">
+        <input class="btn btn-outline-primary" type="submit"  value="accueil">
         
     </form>
 
 <div id="result"></div>
 
-<h1 align="center" class="">Projet n°4 Noé</h1>
+<h1 align="center" class="">Projet n°4 Noé - PHPMYADMIN</h1>
 
-   <div class="form-group">
-    
-        <form id="formulaire" action="article.php" method="post">
-            
-        
-                Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" placeholder="nom d'Auteur">
-                <br><br>
-                   
-                Titre: <input type="text" name="titre" maxlength="50" placeholder="Titre">
-                <br><br>
-                Texte: 
-            <div>
-                <textarea class="rounded" type="text" placeholder="Contenu" cols="40" rows="5" name="comments"></textarea>
-            </div>
-                <br><br>
-            <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
-        </form> 
-        <p></p>
-        <form id="formulaire" action="article.php" method="POST">
-            
-            <input class="btn btn-primary" type="submit" value="Afficher informations" name="Submit2">
-            
-        </form>
-    </div>
 
     <script type="text/javascript">
     if ( window.history.replaceState ) {
@@ -92,14 +68,9 @@ font-size: 50px;
   o.style.height = "1px";
   o.style.height = (25+o.scrollHeight)+"px";
 }
-  
-    
-
-
 </script>
 
 </body>
-
 
 </html>
 
@@ -112,6 +83,8 @@ $today = date("d-m-Y");
 
 
 $identifiant = "0";
+
+
 
 
 $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
@@ -144,43 +117,6 @@ $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC
 
 $result = $conn->query($affich);
 
-
-
-
-if (isset($_POST['Submit1'])) {
-
-
-	print("Bonjour, "); 
-
-	?>
-
-   <strong><?php print htmlspecialchars($auteu); ?></strong>
-   
-   <?php
-		print(" merci pour votre article suivant : ");
-		?>
-
-   <strong><?php print htmlspecialchars($titr); ?></strong>
-
-   <?php
- 
-		print(" qui a pour texte : <br>");
-		echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
-
-		print("<br>le ");
-		print $today;
-
-
-		if ($conn->query($sql) == true) { // Exécution code MySql
-
-			echo "<br><br>Vos informations ont été ajoutés avec succès";
-		} else {
-
-			echo "<br>Error: " . $sql . "<br>" . $conn->error;
-		}
-
-	} elseif (isset($_POST['Submit2'])) {
-
    
 		if ($result->num_rows > 0) {
            
@@ -188,17 +124,33 @@ if (isset($_POST['Submit1'])) {
         // output data of each row
 			while ($row = $result->fetch_assoc()) {
             
-         
+           
             $identifiant = $row["id"];
                 echo "<div class='container'>";
 				echo "<div class='res' width: auto; height:auto>";
-                      
+                 
 
                 echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-               
+             
 				echo '<br/>';
 				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-                
+              
+                        ?><div >
+                        <form action="suppression.php" method="post" class="php">
+                            <p>  
+                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="supprimer">
+                            </p>
+                        </form>
+                        <form action="edition.php" method="post" class="php">
+                            <p>  
+                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="editer">
+                            </p>
+                        </form>
+                        </div>
+                        <?php
+                        
 
 				echo '<p></p>';
 
@@ -206,12 +158,13 @@ if (isset($_POST['Submit1'])) {
                 echo "</div>";
            
             
+           
 			}
 		} else {
 			print "0 resultats trouvés";
 		}
 
-	}
+	
 
 	$conn->close();
 	?>

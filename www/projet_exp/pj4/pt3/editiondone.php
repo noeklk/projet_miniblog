@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -39,9 +39,6 @@ font-size: 50px;
 .res{
 
       position: relative;
-      
-      left : 35%;
-    
 }
 </style>
 <script>
@@ -53,6 +50,10 @@ font-size: 50px;
   o.style.height = "1px";
   o.style.height = (25+o.scrollHeight)+"px";
 }
+
+
+   
+
 </script>
 </head>
 
@@ -80,9 +81,20 @@ font-size: 50px;
 </html>
 
 <?php
+
+date_default_timezone_set('UTC');
+
+
+$today = date("d-m-Y");
 //$identifiant = isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
 $ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : NULL;
+$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
+$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : NULL;
+$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : NULL;
+$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : NULL;
+
+
 
 //echo '<p>' . "id : " . $ID_ROW .'</p>';
 
@@ -99,43 +111,40 @@ if ($conn->connect_error) {
 }
 
 
-$affich = "SELECT auteur, titre, texte, `date` FROM blog2 WHERE id = $ID_ROW";
+$affich = "SELECT auteur, titre, texte FROM blog2 WHERE id = '$ID_ROW'";
 
-
+$edition ="UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
 $result = $conn->query($affich);
 
-if ($result->num_rows > 0) {
 
-           
+
+if ($conn->query($edition) == true) { // Exécution code MySql
+       
+    echo '<p class="text-center">'. $AUT_ROW . $TIT_ROW . $TXT_ROW . $DAT_ROW .'</p>';
+
+    ?><p class="text-center">Vos informations ont été édités avec succès</p><?php
     
-// output data of each row
-    while ($row = $result->fetch_assoc())
-    {
-        echo "<div class='container'>";
-             echo "<div class='res' width: auto; height:auto>";
-                echo '<p style ="transform: translateX(-3%)">' . 'Les informations avec l\'id ' . $ID_ROW .  ' ont bien été supprimés' . '</p>';
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-               // echo '<p>' . $row["id"] . '</p>';
-				echo '<br/>';
-				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-            echo "</div>";
-        echo "</div>";
-              
-    }} else{
+    $conn->close();
+
+} else {
     
+    echo "<br>Error: " . $edition . "<br>" . $conn->error;
+}
 
-        print "BUG SYSTEME ID INTROUVABLE";
-    }
 
-$delete ="DELETE from blog2 where id= $ID_ROW";
+
+
+
+
+/*$delete ="DELETE from blog2 where id= $ID_ROW";
 
 if ($conn->query($delete) === true) { // Exécution code MySql
 
-    $conn->close();
+   
 } else {
 
-    echo "<br>Error: " . $delete . "<br>" . $conn->error;
-}
+    echo "<br>Error: " . $sql . "<br>" . $conn->error;
+}*/
 
 
 

@@ -92,7 +92,31 @@ font-size: 50px;
   o.style.height = "1px";
   o.style.height = (25+o.scrollHeight)+"px";
 }
+   /* function editionsql(x){
+        
+        
+        //. = classe # = id blank = h1 h2
+        
+        location.href = 'editionsql.php';
+        id = x;
+
+        var code = '<article class="style1" id="rowEtu'+i+'" >'
+				code +='<span id="colTof'+i+'"  class="image"><img src="'+photo+'" alt="www.farm5.static.flickr.com" /></span>'
+				code +='<a class ="up" id="colComp'+i+'"></a>';
+				
+				code +='</article>';
+				$('.tiles').append(code);
+      //  $.post('article.php',{postid:id});
+
+       //document.write(id);
+       
   
+    //echo '<textarea>' . x . '</textarea>';
+    
+
+
+    }*/
+
     
 
 
@@ -110,9 +134,13 @@ date_default_timezone_set('UTC');
 
 $today = date("d-m-Y");
 
-
+//$auteu = isset($_POST['auteur']);
+//$titr = isset($_POST['titre']);
+//$comment = isset($_POST['comments']);
 $identifiant = "0";
 
+
+//$test= isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
 $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
 $titr = isset($_POST['titre']) ? $_POST['titre'] : NULL;
@@ -141,7 +169,7 @@ $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$tit
 $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
 
 
-
+//$edition ="UPDATE blog2 SET auteur =  $mauteur, titre = $mtitre, texte = $mtexte WHERE `id` = $identifiant";
 $result = $conn->query($affich);
 
 
@@ -151,7 +179,7 @@ if (isset($_POST['Submit1'])) {
 
 
 	print("Bonjour, "); 
-
+   //print htmlspecialchars($_POST['auteur']); 
 	?>
 
    <strong><?php print htmlspecialchars($auteu); ?></strong>
@@ -163,10 +191,11 @@ if (isset($_POST['Submit1'])) {
    <strong><?php print htmlspecialchars($titr); ?></strong>
 
    <?php
- 
+   //print htmlspecialchars($_POST['titre']);
 		print(" qui a pour texte : <br>");
 		echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
-
+   //echo '<input type="text" name="name1" value="'.$comment.'">';
+   //print htmlspecialchars($_POST['comments']);
 		print("<br>le ");
 		print $today;
 
@@ -181,24 +210,56 @@ if (isset($_POST['Submit1'])) {
 
 	} elseif (isset($_POST['Submit2'])) {
 
-   
+    /*if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            print "<br> Auteur: ". $row["auteur"]. " - Titre: ". $row["titre"]. " - Texte: ". $row["texte"]. " - ". $row["date"].  "<br>";
+        }*/
 		if ($result->num_rows > 0) {
            
 			echo '<p></p>';
         // output data of each row
 			while ($row = $result->fetch_assoc()) {
             
-         
+           /* ?>
+            <input type="text" name="auteur" readonly="readonly"  style="width: 300px;height : 30px" value="<?php print "" .$row["auteur"]. "<br>";  ?>">
+            <?php*/
+            //echo '<input type="text" style="height : 30px; width : 300px" name="name1" readonly="readonly" value='. $row["titre"].'>';
+           
             $identifiant = $row["id"];
                 echo "<div class='container'>";
 				echo "<div class='res' width: auto; height:auto>";
-                      
+                        //. " ondblclick='editionsql($identifiant)'> " ;
+					//. " ondblclick=\"location.href='editionsql.php'\"> " ;
+               // style="position:relative; width: auto; height:auto; text-align:center; border:1px solid black; display: inline-block;;
+
 
                 echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-               
+               // echo '<p>' . $row["id"] . '</p>';
 				echo '<br/>';
 				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-                
+                //echo '<form action="editionsql.php" method="post">';
+                  //  echo '<p>';
+                   //     echo "<input  name='idrow' type='hidden' value='". $identifiant ."'>" ;
+                        ?><div >
+                        <form action="suppression.php" method="post" class="php">
+                            <p>  
+                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="supprimer">
+                            </p>
+                        </form>
+                        <form action="edition.php" method="post" class="php">
+                            <p>  
+                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="editer">
+                            </p>
+                        </form>
+                        </div>
+                        <?php
+                        //echo "<input type='submit' value='editer'>" ;
+                     //   echo "<input type='submit' value='supprimer'>";
+                  //  echo '</p>';
+              //  echo '</form>';
 
 				echo '<p></p>';
 
@@ -206,6 +267,7 @@ if (isset($_POST['Submit1'])) {
                 echo "</div>";
            
             
+           // print "<br> Auteur: ". $row["auteur"]. " - Titre: ". $row["titre"]. " - Texte: ". $row["texte"]. " - ". $row["date"].  "<br>";
 			}
 		} else {
 			print "0 resultats trouvés";
