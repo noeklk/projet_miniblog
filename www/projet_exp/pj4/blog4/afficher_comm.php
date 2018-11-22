@@ -75,7 +75,8 @@ if ($conn->connect_error) {
 
 $affich = "SELECT id, pseudo, texte, `date` FROM commentaire ORDER BY `id` DESC";
 
-
+$charlimit = 200;
+$limitedtext ="";
 
 $result = $conn->query($affich);
 
@@ -86,19 +87,29 @@ $result = $conn->query($affich);
         // output data of each row
             ?>
 
-            <div class="container" style="width : 50%">
+            <div class="container" >
+            <div class="row">
            <u> <p><?php print htmlspecialchars($result->num_rows) ; ?> commentaires</p> </u>
             <table class="table table-bordered">
             <tbody>
 
             <?php
         while ($row = $result->fetch_assoc()) {
+
+
+            $limitedtext= $row["texte"];
+                if (strlen($limitedtext) > $charlimit){
+                    $limitedtext = (substr($limitedtext,0,$charlimit)."...");
+                }
             ?>
 
     <tr>
-      
-      <td><?php print htmlspecialchars($row["pseudo"]) ;?> <br>  <?php print htmlspecialchars($row["date"]); ?></td>
-      <td><?php print htmlspecialchars($row["texte"]);?></td>
+    
+        <td style="white-space: nowrap;" ><?php print htmlspecialchars($row["pseudo"]) ;?> <br>  <?php print htmlspecialchars($row["date"]); ?></td>
+    
+    
+        <td style="overflow: hidden;"><?php print htmlspecialchars($limitedtext);?></td>
+   
       
     </tr>               
            
@@ -108,9 +119,11 @@ $result = $conn->query($affich);
 			print "0 resultats trouvés";
         }
 ?> 
-</tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 <?php
 
 	

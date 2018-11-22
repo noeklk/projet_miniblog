@@ -233,7 +233,7 @@ if (isset($_POST['Submit1'])) {
                 echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
                // echo '<p>' . $row["id"] . '</p>';
 				echo '<br/>';
-				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+				echo '<textarea  style="resize: vertical; border:solid 1.5px black;" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
                 //echo '<form action="editionsql.php" method="post">';
                   //  echo '<p>';
                    //     echo "<input  name='idrow' type='hidden' value='". $identifiant ."'>" ;
