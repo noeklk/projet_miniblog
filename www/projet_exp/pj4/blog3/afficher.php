@@ -29,25 +29,16 @@ font-size: 50px;
 }
 
 
-
-
 .res{
 
       position: relative;
 }
 </style>
 <script>
+
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
-    }
-
-    function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
-}
-
-
-   
+    } 
 
 </script>
 </head>
@@ -58,7 +49,7 @@ font-size: 50px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
- <form align="right" action="article.php" method="POST">
+ <form id="log" action="article.php" method="POST">
 		
         <input class="btn btn-outline-primary" type="submit"  value="accueil">
         
@@ -68,7 +59,7 @@ font-size: 50px;
 
 
 
-<h1 align="center" class="">Projet n°4 Noé - Edition SQL</h1>
+<h1 align="center" class="">Projet n°4 Noé - ET3 Afficher</h1>
 <div id="result"></div>
     
 </body>
@@ -81,22 +72,14 @@ date_default_timezone_set('UTC');
 
 
 $today = date("d-m-Y");
-//$identifiant = isset($_POST['postid']) ? $_POST['postid'] : NULL;
-
-$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : NULL;
-$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
-$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : NULL;
-$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : NULL;
-$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : NULL;
 
 
-
-//echo '<p>' . "id : " . $ID_ROW .'</p>';
+$ID_ROW = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "miniblogpt2";
+$dbname = "blog2-3";
 
 // Connexion au serveur MySQL
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -106,48 +89,57 @@ if ($conn->connect_error) {
 }
 
 
-$affich = "SELECT auteur, titre, texte FROM blog2 WHERE id = '$ID_ROW'";
-
-$edition ="UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
+$affich = "SELECT auteur, titre, texte, `date` FROM blog2 WHERE id = '$ID_ROW'";
 $result = $conn->query($affich);
 
-
-
-if ($conn->query($edition) == true) { // Exécution code MySql
-       
-    echo '<p class="text-center">'. $AUT_ROW . $TIT_ROW . $TXT_ROW . $DAT_ROW .'</p>';
-
-    ?><p class="text-center">Vos informations ont été édités avec succès</p><?php
-    
-    $conn->close();
-
-} else {
-    
-    echo "<br>Error: " . $edition . "<br>" . $conn->error;
-}
-
-
-
-
-
-
-/*$delete ="DELETE from blog2 where id= $ID_ROW";
-
-if ($conn->query($delete) === true) { // Exécution code MySql
+if ($conn->query($affich) == true) { // Exécution code MySql
 
    
 } else {
 
-    echo "<br>Error: " . $sql . "<br>" . $conn->error;
-}*/
+    echo "<br>Error: " . $affich . "<br>" . $conn->error;
+}
 
+$charlimit = 200;
+$limitedtext ="";
 
+   
+		if ($result->num_rows > 0) {
+           
+			echo '<p></p>';
+        // output data of each row
+			while ($row = $result->fetch_assoc()) {
+                $limitedtext= $row["texte"];
+                if (strlen($limitedtext) > $charlimit){
+                    $limitedtext = (substr($limitedtext,0,$charlimit)."...");
+                }
 
+           
+?>
+                <div class='container'>
 
+				    <div class='res' width: auto; height:auto>
+<?php   
+             
+             
+                        echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+                    
+                        echo '<br/>';
 
+                        echo '<textarea style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded"  maxlength="200">' . $limitedtext . '</textarea>';
+                        
+?>
+				        <p></p>
 
-////////////////////////////////////////////////
+                    </div>
 
+                </div>
+           
+<?php
+			}
+		} else {
+			print "0 resultats trouvés";
+		}
 
-	?>
+?>
 

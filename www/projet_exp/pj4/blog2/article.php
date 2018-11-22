@@ -47,16 +47,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<div>
-    <form align="right" action="login.php" method="POST">
-            
-        <input class="btn btn-outline-primary" type="submit" value="login">
-            
-    </form>
 
-<h1 align="center" class="">Projet n°4 Noé</h1>
 
-</div>
+<h1 align="center" class="">Projet n°4 Noé ET2 Article</h1>
+
+
 
    <div class="form-group">
     
@@ -76,7 +71,7 @@
             <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
         </form> 
         <p></p>
-        <form id="formulaire" action="article.php" method="POST">
+        <form id="formulaire" action="lister.php" method="POST">
             
             <input class="btn btn-primary" type="submit" value="Afficher informations" name="Submit2">
             
@@ -120,7 +115,7 @@ $comment = isset($_POST['comments']) ? $_POST['comments'] : NULL;
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "miniblogpt2";
+$dbname = "blog2-3";
 
 
 // Connexion au serveur MySQL
@@ -171,42 +166,8 @@ if (isset($_POST['Submit1'])) {
 
 			echo "<br>Error: " . $sql . "<br>" . $conn->error;
 		}
-
-	} elseif (isset($_POST['Submit2'])) {
-
-   
-		if ($result->num_rows > 0) {
-           
-			echo '<p></p>';
-        // output data of each row
-			while ($row = $result->fetch_assoc()) {
-            
-         
-            $identifiant = $row["id"];
-            ?>
-                <div class='container'>
-				<div class='res' width: auto; height:auto>
-             <?php         
-
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-               
-				echo '<br/>';
-				echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded" maxlength="200">' . $row["texte"] . '</textarea>';
-                
-            ?>
-				         <p></p>
-
-                    </div>
-                </div>
-           
-            <?php
-			}
-		} else {
-			print "0 resultats trouvés";
-		}
-
-	}
-
+}
+	 
 	$conn->close();
 	?>
 

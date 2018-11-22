@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <title> Mini Blog PT2</title>
+    <title> Mini Blog ET2</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,12 +27,6 @@
         font-size: 50px;
         }
 
-        #log{
-            position: absolute;
-            top: 20px;
-            right: 20px;  
-        }
-
         .res{
             position: relative;     
             left : 35%;  
@@ -48,51 +42,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div>
-    <form align="right" action="login.php" method="POST">
+    <form align="right" action="article.php">
             
-        <input class="btn btn-outline-primary" type="submit" value="login">
+        <input class="btn btn-outline-primary" type="submit" value="accueil">
             
     </form>
 
-<h1 align="center" class="">Projet n°4 Noé</h1>
+<h1 align="center" class="">Projet n°4 Noé ET2 Lister</h1>
 
 </div>
 
-   <div class="form-group">
-    
-        <form id="formulaire" action="article.php" method="post">
-            
-        
-                Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" placeholder="nom d'Auteur">
-                <br><br>
-                   
-                Titre: <input type="text" name="titre" maxlength="50" placeholder="Titre">
-                <br><br>
-                Texte: 
-            <div>
-                <textarea class="rounded" type="text" placeholder="Contenu" cols="40" rows="5" name="comments"></textarea>
-            </div>
-                <br><br>
-            <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
-        </form> 
-        <p></p>
-        <form id="formulaire" action="article.php" method="POST">
-            
-            <input class="btn btn-primary" type="submit" value="Afficher informations" name="Submit2">
-            
-        </form>
-    </div>
+ 
 
     <script type="text/javascript">
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
-
-    function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
-}
-
         </script>
     </body>
 </html>
@@ -102,10 +67,6 @@ date_default_timezone_set('UTC');
 
 
 $today = date("d-m-Y");
-
-
-$identifiant = "0";
-
 
 $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
 $titr = isset($_POST['titre']) ? $_POST['titre'] : NULL;
@@ -120,7 +81,7 @@ $comment = isset($_POST['comments']) ? $_POST['comments'] : NULL;
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "miniblogpt2";
+$dbname = "blog2-3";
 
 
 // Connexion au serveur MySQL
@@ -136,43 +97,8 @@ $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC
 
 
 $result = $conn->query($affich);
-
-
-
-
-if (isset($_POST['Submit1'])) {
-
-
-	print("Bonjour, "); 
-
-	?>
-
-   <strong><?php print htmlspecialchars($auteu); ?></strong>
-   
-   <?php
-		print(" merci pour votre article suivant : ");
-		?>
-
-   <strong><?php print htmlspecialchars($titr); ?></strong>
-
-   <?php
- 
-		print(" qui a pour texte : <br>");
-		echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
-
-		print("<br>le ");
-		print $today;
-
-
-		if ($conn->query($sql) == true) { // Exécution code MySql
-
-			echo "<br><br>Vos informations ont été ajoutés avec succès";
-		} else {
-
-			echo "<br>Error: " . $sql . "<br>" . $conn->error;
-		}
-
-	} elseif (isset($_POST['Submit2'])) {
+$charlimit = 200;
+$limitedtext ="";
 
    
 		if ($result->num_rows > 0) {
@@ -180,18 +106,23 @@ if (isset($_POST['Submit1'])) {
 			echo '<p></p>';
         // output data of each row
 			while ($row = $result->fetch_assoc()) {
-            
-         
-            $identifiant = $row["id"];
+            $limitedtext= $row["texte"];
+                if (strlen($limitedtext) > $charlimit){
+                    $limitedtext = (substr($limitedtext,0,$charlimit)."...");
+                }
+
+           
             ?>
                 <div class='container'>
 				<div class='res' width: auto; height:auto>
-             <?php         
+             <?php   
+             
+             
 
                 echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
                
 				echo '<br/>';
-				echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded" maxlength="200">' . $row["texte"] . '</textarea>';
+				echo '<textarea style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $limitedtext . '</textarea>';
                 
             ?>
 				         <p></p>
@@ -205,7 +136,7 @@ if (isset($_POST['Submit1'])) {
 			print "0 resultats trouvés";
 		}
 
-	}
+	
 
 	$conn->close();
 	?>

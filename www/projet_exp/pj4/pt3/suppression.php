@@ -28,13 +28,7 @@ font-family: 'Open Sans', sans-serif;
 font-size: 50px;
 }
 
-#log{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    
 
-}
 
 .res{
 
@@ -62,7 +56,7 @@ font-size: 50px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
- <form id="log" action="article.php" method="POST">
+ <form align="right" action="article.php" method="POST">
 		
         <input class="btn btn-outline-primary" type="submit"  value="accueil">
         

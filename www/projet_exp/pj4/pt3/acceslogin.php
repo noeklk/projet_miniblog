@@ -27,11 +27,7 @@ font-family: 'Open Sans', sans-serif;
 font-size: 50px;
 }
 
-#log{
-    position: absolute;
-    top: 20px;
-    right: 20px;  
-}
+
 
 .res{
       position: relative;     
@@ -48,7 +44,7 @@ font-size: 50px;
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<form id="log" action="article.php" method="POST">
+<form align="right" action="article.php" method="POST">
 		
         <input class="btn btn-outline-primary" type="submit"  value="accueil">
         
