@@ -83,9 +83,9 @@ $identifiant = "0";
 
 
 
-$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
-$titr = isset($_POST['titre']) ? $_POST['titre'] : NULL;
-$comment = isset($_POST['comments']) ? $_POST['comments'] : NULL;
+$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+$titr = isset($_POST['titre']) ? $_POST['titre'] : null;
+$comment = isset($_POST['comments']) ? $_POST['comments'] : null;
 
 
 
@@ -103,7 +103,7 @@ $dbname = "miniblogpt2";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
@@ -113,25 +113,25 @@ $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC
 
 $result = $conn->query($affich);
 
-   
-		if ($result->num_rows > 0) {
-           
-			echo '<p></p>';
-        // output data of each row
-			while ($row = $result->fetch_assoc()) {
-            
-           
-            $identifiant = $row["id"];
-                echo "<div class='container'>";
-				echo "<div class='res' width: auto; height:auto>";
-                 
 
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-             
-				echo '<br/>';
-				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-              
-                        ?><div >
+if ($result->num_rows > 0) {
+
+    echo '<p></p>';
+        // output data of each row
+    while ($row = $result->fetch_assoc()) {
+
+
+        $identifiant = $row["id"];
+        echo "<div class='container'>";
+        echo "<div class='res' width: auto; height:auto>";
+
+
+        echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+
+        echo '<br/>';
+        echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+
+        ?><div >
                         <form action="suppression.php" method="post" class="php">
                             <p>  
                                 <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
@@ -146,22 +146,22 @@ $result = $conn->query($affich);
                         </form>
                         </div>
                         <?php
-                        
 
-				echo '<p></p>';
 
-                echo "</div>";
-                echo "</div>";
-           
-            
-           
-			}
-		} else {
-			print "0 resultats trouvés";
-		}
+                        echo '<p></p>';
 
-	
+                        echo "</div>";
+                        echo "</div>";
 
-	$conn->close();
-	?>
+
+
+                    }
+                } else {
+                    print "0 resultats trouvés";
+                }
+
+
+
+                $conn->close();
+                ?>
 

@@ -82,20 +82,19 @@ font-size: 50px;
 
 <?php
 
-$IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : NULL;
-$IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : NULL;
+$IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
+$IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
 
-$IDVRAI ="root";
-$MDPVRAI ="root";
+$IDVRAI = "root";
+$MDPVRAI = "root";
 
 
 if (isset($_POST['Submit1'])) {
 
-    if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI){
+    if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI) {
         header('Location: acceslogin.php');
 
-    }
-    else{
+    } else {
         echo '<p class="text-center"> ID ou MDP erroné </p>';
     }
 

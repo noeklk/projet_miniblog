@@ -83,11 +83,11 @@ date_default_timezone_set('UTC');
 $today = date("d-m-Y");
 //$identifiant = isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
-$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : NULL;
-$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
-$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : NULL;
-$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : NULL;
-$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : NULL;
+$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : null;
+$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : null;
+$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : null;
+$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : null;
 
 
 
@@ -102,52 +102,38 @@ $dbname = "miniblogpt2";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
 $affich = "SELECT auteur, titre, texte FROM blog2 WHERE id = '$ID_ROW'";
 
-$edition ="UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
+$edition = "UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
 $result = $conn->query($affich);
 
 
 
 if ($conn->query($edition) == true) { // Exécution code MySql
-       
-    echo '<p class="text-center">'. $AUT_ROW . $TIT_ROW . $TXT_ROW . $DAT_ROW .'</p>';
 
-    ?><p class="text-center">Vos informations ont été édités avec succès</p><?php
-    
-    $conn->close();
+   // echo '<p class="text-center">' . $AUT_ROW . $TIT_ROW . $TXT_ROW . $DAT_ROW . '</p>';
+
+    ?>
+    <p class="text-center">Vos informations ont été édités avec succès</p>
+    <?php
+
+
 
 } else {
-    
+
     echo "<br>Error: " . $edition . "<br>" . $conn->error;
 }
 
 
-
-
-
-
-/*$delete ="DELETE from blog2 where id= $ID_ROW";
-
-if ($conn->query($delete) === true) { // Exécution code MySql
-
-   
-} else {
-
-    echo "<br>Error: " . $sql . "<br>" . $conn->error;
-}*/
+$conn->close();
 
 
 
 
 
-
-////////////////////////////////////////////////
-
-
-	?>
+?>
 
