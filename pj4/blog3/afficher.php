@@ -109,9 +109,11 @@ $limitedtext ="";
 			echo '<p></p>';
         // output data of each row
 			while ($row = $result->fetch_assoc()) {
+
                 $limitedtext= $row["texte"];
                 if (strlen($limitedtext) > $charlimit){
                     $limitedtext = (substr($limitedtext,0,$charlimit)."...");
+                    
                 }
 
            

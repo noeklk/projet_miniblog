@@ -15,12 +15,7 @@
 
     <style>
 
-        form.php {
-            display: inline-block; //Or display: inline; 
-        }
-        #formulaire{
-            text-align: center;
-        }
+    
 
         h1{
         font-family: 'Open Sans', sans-serif;
@@ -31,6 +26,15 @@
             position: relative;     
             left : 35%;  
         }
+      button{
+
+        background-image:none;
+        padding: 0;
+        border: none;
+        background: none;
+      }
+
+}
 
     </style>
 </head>
@@ -46,15 +50,14 @@
 
 <h1 align="center" class="">Projet n°4 Noé ET4 Affich_Comm</h1>
 
-
-
- 
-
     <script type="text/javascript">
+
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
-        </script>
+
+    </script>
+
     </body>
 </html>
 <?php
@@ -72,14 +75,67 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
+$ID_ROW = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $affich = "SELECT id, pseudo, texte, `date` FROM commentaire ORDER BY `id` DESC";
 
 $charlimit = 200;
 $limitedtext ="";
 
-$result = $conn->query($affich);
+$affichmore = "SELECT pseudo, texte, `date` FROM commentaire WHERE id = '$ID_ROW'";
 
+//$replacedottext= <a href="afficher_comm.php?hello=true">... </a>  ;
+
+
+
+
+if (isset($_GET["btnSubmit"])){
+
+    $result = $conn->query($affichmore);
+
+    if ($result->num_rows > 0) {
+           
+        echo '<p></p>';
+    // output data of each row
+        ?>
+
+        <div class="container" >
+        <div class="row">
+       
+        <table class="table table-bordered">
+        <tbody>
+
+        <?php
+
+    while ($row = $result->fetch_assoc()) {
+
+      
+         
+        ?>
+
+<tr>
+            
+    <td style="white-space: nowrap;" ><?php print htmlspecialchars($row["pseudo"]) ;?> <br>  <?php print htmlspecialchars($row["date"]); ?></td>
+
+
+    <td style="word-break:break-all;"><?php print htmlspecialchars($row["texte"]);
+    
+     ?></td>
+
+  
+</tr>               
+       
+        <?php
+        }
+    } else {
+        print "0 resultats trouvés";
+    }
+    
+
+
+}
+else{
+    $result = $conn->query($affich);
    
 		if ($result->num_rows > 0) {
            
@@ -90,25 +146,50 @@ $result = $conn->query($affich);
             <div class="container" >
             <div class="row">
            <u> <p><?php print htmlspecialchars($result->num_rows) ; ?> commentaires</p> </u>
-            <table class="table table-bordered">
+            <table class="table table-bordered"  >
             <tbody>
 
             <?php
+
         while ($row = $result->fetch_assoc()) {
 
-
+            $identifiant = $row["id"];
             $limitedtext= $row["texte"];
                 if (strlen($limitedtext) > $charlimit){
-                    $limitedtext = (substr($limitedtext,0,$charlimit)."...");
+
+                    $limitedtext = substr($limitedtext,0,$charlimit)."...";
+                           
+                     
                 }
             ?>
 
     <tr>
-    
+                
         <td style="white-space: nowrap;" ><?php print htmlspecialchars($row["pseudo"]) ;?> <br>  <?php print htmlspecialchars($row["date"]); ?></td>
     
     
-        <td style="overflow: hidden;"><?php print htmlspecialchars($limitedtext);?></td>
+        <td style="word-break:break-all;" ><?php print htmlspecialchars($limitedtext);
+        if(strlen($row["texte"]) > $charlimit){
+        // echo ' ...<a href="" >' ."Read More". '</a>';
+
+        
+         ?>
+         <form class ="transp-img" action="afficher_comm.php" method="get" >
+                              
+                                <input  name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <!--<input name="btnSubmit"  type="submit" value="Lire Plus">-->
+                                <button type="submit" name="btnSubmit" >
+                                <img src="readmore.png" style="max-width: 100px;height: auto;>"    />
+                                </button>
+                            
+                        </form>
+         <!-- ...<a href="" onclick="clear_div()" > Read More</a>-->
+         
+<?php
+         
+        }
+        
+         ?></td>
    
       
     </tr>               
@@ -118,6 +199,7 @@ $result = $conn->query($affich);
 		} else {
 			print "0 resultats trouvés";
         }
+    }
 ?> 
             </tbody>
         </table>
