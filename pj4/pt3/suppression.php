@@ -76,7 +76,7 @@ font-size: 50px;
 <?php
 //$identifiant = isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
-$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : NULL;
+$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : null;
 
 //echo '<p>' . "id : " . $ID_ROW .'</p>';
 
@@ -89,7 +89,7 @@ $dbname = "miniblogpt2";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
@@ -103,25 +103,25 @@ if ($result->num_rows > 0) {
            
     
 // output data of each row
-    while ($row = $result->fetch_assoc())
-    {
+    while ($row = $result->fetch_assoc()) {
         echo "<div class='container'>";
-             echo "<div class='res' width: auto; height:auto>";
-                echo '<p style ="transform: translateX(-3%)">' . 'Les informations avec l\'id ' . $ID_ROW .  ' ont bien été supprimés' . '</p>';
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+        echo "<div class='res' width: auto; height:auto>";
+        echo '<p style ="transform: translateX(-3%)">' . 'Les informations avec l\'id ' . $ID_ROW . ' ont bien été supprimés' . '</p>';
+        echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
                // echo '<p>' . $row["id"] . '</p>';
-				echo '<br/>';
-				echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-            echo "</div>";
+        echo '<br/>';
+        echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
         echo "</div>";
-              
-    }} else{
-    
+        echo "</div>";
 
-        print "BUG SYSTEME ID INTROUVABLE";
     }
+} else {
 
-$delete ="DELETE from blog2 where id= $ID_ROW";
+
+    print "BUG SYSTEME ID INTROUVABLE";
+}
+
+$delete = "DELETE from blog2 where id= $ID_ROW";
 
 if ($conn->query($delete) === true) { // Exécution code MySql
 
@@ -139,5 +139,5 @@ if ($conn->query($delete) === true) { // Exécution code MySql
 ////////////////////////////////////////////////
 
 
-	?>
+?>
 

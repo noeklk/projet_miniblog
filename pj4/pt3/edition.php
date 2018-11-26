@@ -81,11 +81,11 @@ date_default_timezone_set('UTC');
 $today = date("d-m-Y");
 //$identifiant = isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
-$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : NULL;
-$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
-$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : NULL;
-$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : NULL;
-$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : NULL;
+$ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : null;
+$AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+$TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : null;
+$TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : null;
+$DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : null;
 
 $servername = "localhost";
 $username = "root";
@@ -96,29 +96,28 @@ $dbname = "miniblogpt2";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
 $affich = "SELECT auteur, titre, texte FROM blog2 WHERE id = '$ID_ROW'";
-$edition ="UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
+$edition = "UPDATE blog2 SET auteur='$AUT_ROW', titre='$TIT_ROW', texte='$TXT_ROW', `date`='$DAT_ROW' where id = '$ID_ROW'";
 $result = $conn->query($affich);
 
 if ($conn->query($affich) == true) { // Exécution code MySql
 
-   
+
 } else {
 
     echo "<br>Error: " . $affich . "<br>" . $conn->error;
 }
 
 
-if ($result->num_rows > 0 ) {
+if ($result->num_rows > 0) {
  
 // output data of each row
-    while ($row = $result->fetch_assoc())
-    {
-       $editdate = "edit : $today ";
+    while ($row = $result->fetch_assoc()) {
+        $editdate = "edit : $today ";
         ?><form  action="editiondone.php" method="post" style="text-align: center;">
         <div class="container; form-group" >
              <div class='res' width: auto; height:auto>
@@ -149,12 +148,13 @@ if ($result->num_rows > 0 ) {
             </div>
          </div>
          </form> <?php
-              
-    }} else{
-    
 
-        print "BUG SYSTEME ID INTROUVABLE";
-   }
+            }
+        } else {
+
+
+            print "BUG SYSTEME ID INTROUVABLE";
+        }
 
 /*$delete ="DELETE from blog2 where id= $ID_ROW";
 
@@ -174,5 +174,5 @@ if ($conn->query($delete) === true) { // Exécution code MySql
 ////////////////////////////////////////////////
 
 
-	?>
+        ?>
 

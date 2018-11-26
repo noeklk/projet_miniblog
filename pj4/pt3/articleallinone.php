@@ -138,9 +138,9 @@ $identifiant = "0";
 
 //$test= isset($_POST['postid']) ? $_POST['postid'] : NULL;
 
-$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : NULL;
-$titr = isset($_POST['titre']) ? $_POST['titre'] : NULL;
-$comment = isset($_POST['comments']) ? $_POST['comments'] : NULL;
+$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+$titr = isset($_POST['titre']) ? $_POST['titre'] : null;
+$comment = isset($_POST['comments']) ? $_POST['comments'] : null;
 
 
 
@@ -158,7 +158,7 @@ $dbname = "miniblogpt2";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
@@ -174,70 +174,70 @@ $result = $conn->query($affich);
 if (isset($_POST['Submit1'])) {
 
 
-	print("Bonjour, "); 
+    print("Bonjour, "); 
    //print htmlspecialchars($_POST['auteur']); 
-	?>
+    ?>
 
    <strong><?php print htmlspecialchars($auteu); ?></strong>
    
    <?php
-		print(" merci pour votre article suivant : ");
-		?>
+    print(" merci pour votre article suivant : ");
+    ?>
 
    <strong><?php print htmlspecialchars($titr); ?></strong>
 
    <?php
    //print htmlspecialchars($_POST['titre']);
-		print(" qui a pour texte : <br>");
-		echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
+    print(" qui a pour texte : <br>");
+    echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
    //echo '<input type="text" name="name1" value="'.$comment.'">';
    //print htmlspecialchars($_POST['comments']);
-		print("<br>le ");
-		print $today;
+    print("<br>le ");
+    print $today;
 
 
-		if ($conn->query($sql) == true) { // Exécution code MySql
+    if ($conn->query($sql) == true) { // Exécution code MySql
 
-			echo "<br><br>Vos informations ont été ajoutés avec succès";
-		} else {
+        echo "<br><br>Vos informations ont été ajoutés avec succès";
+    } else {
 
-			echo "<br>Error: " . $sql . "<br>" . $conn->error;
-		}
+        echo "<br>Error: " . $sql . "<br>" . $conn->error;
+    }
 
-	} elseif (isset($_POST['Submit2'])) {
+} elseif (isset($_POST['Submit2'])) {
 
     /*if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
             print "<br> Auteur: ". $row["auteur"]. " - Titre: ". $row["titre"]. " - Texte: ". $row["texte"]. " - ". $row["date"].  "<br>";
         }*/
-		if ($result->num_rows > 0) {
-           
-			echo '<p></p>';
+    if ($result->num_rows > 0) {
+
+        echo '<p></p>';
         // output data of each row
-			while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             
            /* ?>
             <input type="text" name="auteur" readonly="readonly"  style="width: 300px;height : 30px" value="<?php print "" .$row["auteur"]. "<br>";  ?>">
             <?php*/
             //echo '<input type="text" style="height : 30px; width : 300px" name="name1" readonly="readonly" value='. $row["titre"].'>';
-           
+
             $identifiant = $row["id"];
-                echo "<div class='container'>";
-				echo "<div class='res' width: auto; height:auto>";
+            echo "<div class='container'>";
+            echo "<div class='res' width: auto; height:auto>";
                         //. " ondblclick='editionsql($identifiant)'> " ;
 					//. " ondblclick=\"location.href='editionsql.php'\"> " ;
                // style="position:relative; width: auto; height:auto; text-align:center; border:1px solid black; display: inline-block;;
 
 
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+            echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
                // echo '<p>' . $row["id"] . '</p>';
-				echo '<br/>';
-				echo '<textarea  style="resize: vertical; border:solid 1.5px black;" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+            echo '<br/>';
+            echo '<textarea  style="resize: vertical; border:solid 1.5px black;" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
                 //echo '<form action="editionsql.php" method="post">';
                   //  echo '<p>';
                    //     echo "<input  name='idrow' type='hidden' value='". $identifiant ."'>" ;
-                        ?><div >
+            ?><div >
                         <form action="suppression.php" method="post" class="php">
                             <p>  
                                 <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
@@ -257,20 +257,20 @@ if (isset($_POST['Submit1'])) {
                   //  echo '</p>';
               //  echo '</form>';
 
-				echo '<p></p>';
+                        echo '<p></p>';
 
-                echo "</div>";
-                echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
            
             
            // print "<br> Auteur: ". $row["auteur"]. " - Titre: ". $row["titre"]. " - Texte: ". $row["texte"]. " - ". $row["date"].  "<br>";
-			}
-		} else {
-			print "0 resultats trouvés";
-		}
+                    }
+                } else {
+                    print "0 resultats trouvés";
+                }
 
-	}
+            }
 
-	$conn->close();
-	?>
+            $conn->close();
+            ?>
 
