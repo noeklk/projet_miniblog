@@ -141,15 +141,15 @@ $result = $conn->query($affich);
 
 
 if (isset($_POST['Submit1'])) {
-?>
+    ?>
 
 <div align="center">
 
 <?php
 
-    print("Bonjour, ");
+print("Bonjour, ");
 
-    ?>
+?>
 
    <strong><?php print htmlspecialchars($auteu); ?></strong>
    
@@ -162,26 +162,26 @@ if (isset($_POST['Submit1'])) {
    <?php
 
     print(" qui a pour texte : ");
-    
+
     echo "<br/><br/>";
-    
+
     echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
 
     print("<br>le ");
     print $today;
-?>
+    ?>
 
 </div>
 
 <?php
 
-    if ($conn->query($sql) == true) { // Exécution code MySql
+if ($conn->query($sql) == true) { // Exécution code MySql
 
-        echo "<br><br>Vos informations ont été ajoutés avec succès";
-    } else {
+    echo "<br><br>Vos informations ont été ajoutés avec succès";
+} else {
 
-        echo "<br>Error: " . $sql . "<br>" . $conn->error;
-    }
+    echo "<br>Error: " . $sql . "<br>" . $conn->error;
+}
 
 } elseif (isset($_POST['Submit2'])) {
 
@@ -202,9 +202,16 @@ if (isset($_POST['Submit1'])) {
             echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
 
             echo '<br/>';
-            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded" maxlength="200">' . $row["texte"] . '</textarea>';
+            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
 
             ?>
+            <br/>
+            <form action="#" method="post" class="php" style="transform:translateX(30%);">
+                            <p>  
+                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="Ajouter un commentaire">
+                            </p>
+                        </form>
 				         <p></p>
 
                     </div>

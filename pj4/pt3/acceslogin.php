@@ -16,7 +16,8 @@
 <style>
 
 form.php {
-    display: inline-block; //Or display: inline; 
+    display: inline-block; 
+    display: inline; 
 }
 #formulaire{
     text-align: center;
