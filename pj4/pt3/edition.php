@@ -58,7 +58,13 @@ font-size: 50px;
 
  <form align="right" action="article.php" method="POST">
 		
-        <input class="btn btn-outline-primary" type="submit"  value="accueil">
+        <input class="btn btn-outline-primary" type="submit"  value="accueil invite">
+        
+    </form>
+
+    <form align="right" action="acceslogin.php" method="POST">
+		
+        <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
         
     </form>
 
@@ -86,6 +92,7 @@ $AUT_ROW = isset($_POST['auteur']) ? $_POST['auteur'] : null;
 $TIT_ROW = isset($_POST['titre']) ? $_POST['titre'] : null;
 $TXT_ROW = isset($_POST['comments']) ? $_POST['comments'] : null;
 $DAT_ROW = isset($_POST['editdate']) ? $_POST['editdate'] : null;
+
 
 $servername = "localhost";
 $username = "root";
@@ -129,12 +136,15 @@ if ($result->num_rows > 0) {
                 <br><br>
                 Texte: 
                 <div>
-                <textarea class="rounded" type="text" cols="40" rows="5" name="comments"><?php echo htmlspecialchars($row["texte"]); ?></textarea>
+                    <textarea class="rounded" type="text" cols="40" rows="5" name="comments"><?php echo htmlspecialchars($row["texte"]); ?></textarea>
                 </div>
 
                 <input  name="editdate" type="hidden" value="<?php echo htmlspecialchars($editdate); ?>">
+
                 <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($ID_ROW); ?>">
+
                 <br><br>
+
                 <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
                 <?php
                 

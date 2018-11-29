@@ -58,12 +58,17 @@ font-size: 50px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
- <form align="right" action="article.php" method="POST">
+<form align="right" action="article.php" method="POST">
 		
-        <input class="btn btn-outline-primary" type="submit"  value="accueil">
+        <input class="btn btn-outline-primary" type="submit"  value="accueil invite">
         
     </form>
 
+    <form align="right" action="acceslogin.php" method="POST">
+		
+        <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
+        
+    </form>
 
 
 
@@ -113,19 +118,54 @@ $result = $conn->query($affich);
 
 
 
-if ($conn->query($edition) == true) { // Exécution code MySql
+if ($conn->query($affich) == true) { // Exécution code MySql
 
-   // echo '<p class="text-center">' . $AUT_ROW . $TIT_ROW . $TXT_ROW . $DAT_ROW . '</p>';
+   
 
-    ?>
-    <p class="text-center">Vos informations ont été édités avec succès</p>
-    <?php
+  
+
+    if ($result->num_rows > 0) {
+
+echo '<p></p>';
+// output data of each row
+while ($row = $result->fetch_assoc()) {
+
+    if ($row['auteur'] == $AUT_ROW && $row['titre'] == $TIT_ROW && $row['texte'] == $TXT_ROW ){
+
+        ?>
+        <p class="text-center">Aucune modification effectué</p>
+        <?php
+    
+
+    }
+else{
+    if ($conn->query($edition) == true){
+
+        ?>
+        <p class="text-center">Vos modifications ont été effectué avec succès</p>
+        <?php
+
+    }
+    else{
+        echo "<br>Error: " . $edition . "<br>" . $conn->error;
+
+    }
+    
+}    
+  
+            }
+        } else {
+            print "0 resultats trouvés";
+        }
+
+    
 
 
 
 } else {
 
-    echo "<br>Error: " . $edition . "<br>" . $conn->error;
+    
+    echo "<br>Error: " . $affich . "<br>" . $conn->error;
 }
 
 

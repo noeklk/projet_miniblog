@@ -141,7 +141,11 @@ $result = $conn->query($affich);
 
 
 if (isset($_POST['Submit1'])) {
+?>
 
+<div align="center">
+
+<?php
 
     print("Bonjour, ");
 
@@ -157,12 +161,19 @@ if (isset($_POST['Submit1'])) {
 
    <?php
 
-    print(" qui a pour texte : <br>");
+    print(" qui a pour texte : ");
+    
+    echo "<br/><br/>";
+    
     echo '<textarea readonly="readonly" cols="40" rows="5"  class="box">' . $comment . '</textarea>';
 
     print("<br>le ");
     print $today;
+?>
 
+</div>
+
+<?php
 
     if ($conn->query($sql) == true) { // Exécution code MySql
 
