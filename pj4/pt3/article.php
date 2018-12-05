@@ -9,15 +9,9 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-
     <style>
 
-        form.php {
-            display: inline-block; //Or display: inline; 
-        }
+     
         #formulaire{
             text-align: center;
         }
@@ -41,7 +35,7 @@
     </style>
 </head>
 
-<body >
+<body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -54,7 +48,7 @@
             
     </form>
 
-<h1 align="center" class="">Projet n°4 Noé</h1>
+<h1 align="center" class="">Projet n°4 Noé - Final</h1>
 
 </div>
 
@@ -188,34 +182,38 @@ if ($conn->query($sql) == true) { // Exécution code MySql
 
     if ($result->num_rows > 0) {
 
+        ?>
+                
+        <div class='container' align="center">
+        
+
+        <?php 
         echo '<p></p>';
         // output data of each row
         while ($row = $result->fetch_assoc()) {
 
 
             $identifiant = $row["id"];
-            ?>
-                <div class='container'>
-				<div class='res' width: auto; height:auto>
-             <?php 
+           
 
             echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
 
-            echo '<br/>';
+            ?>
+            <br/>
+            <?php
             echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
 
             ?>
             <br/>
-            <form action="#" method="post" class="php" style="transform:translateX(30%);">
+            <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post" class="">
                             <p>  
-                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                <input type="submit" value="Ajouter un commentaire">
+                                <input  name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                <input type="submit" value="Accéder à cet article">
                             </p>
                         </form>
 				         <p></p>
 
-                    </div>
-                </div>
+                  
            
             <?php
 
@@ -223,7 +221,11 @@ if ($conn->query($sql) == true) { // Exécution code MySql
     } else {
         print "0 resultats trouvés";
     }
+?>
+  
 
+</div>
+<?php
 }
 
 $conn->close();

@@ -15,9 +15,7 @@
 
     <style>
 
-        form.php {
-            display: inline-block; //Or display: inline; 
-        }
+       
         #formulaire{
             text-align: center;
         }
@@ -40,17 +38,23 @@
             background: none;
 }
 
-        .res{
-            position: relative;     
-            left : 35%;  
-        }
-
+      
     </style>
-    <h1 align="center" class="">Projet n°5 Noé ET4 commentaire-fusion</h1>
-<br/>
+    
 </head>
 
 <body >
+
+<form align ="right" action="article.php">
+            
+            <input class="btn btn-outline-primary" type="submit" value="accueil">
+                
+    </form>
+    
+    
+<h1 align="center"  class="">Projet n°5 Noé ET4 commentaire-fusion</h1>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -69,7 +73,7 @@ $today = date("d-m-Y");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "blog5";
+$dbname = "miniblogpt2";
 
 
 // Connexion au serveur MySQL
@@ -79,26 +83,31 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
     
-$ID_ROW = isset($_GET['id']) ? $_GET['id'] : null;
+$ID_ROW = isset($_GET['readmoreid']) ? $_GET['readmoreid'] : null;
+$ID_ART = isset($_GET['id']) ? $_GET['id'] : null;
 //$ID_ROWP = isset($_POST['id']) ? $_POST['id'] : null;
 
-$affich = "SELECT id, pseudo, texte, `date` FROM commentaire ORDER BY `id` DESC";
 
-$charlimit = 200;
+$affichart = "SELECT id, auteur, titre, texte, `date` FROM blog2 WHERE id = '$ID_ART'";
+$affichcomm = "SELECT id, pseudo, texte, `date` FROM commentaire WHERE id_article = '$ID_ART' ORDER BY `id` DESC";
+
+$charlimit = 50;
 $limitedtext = "";
 
 $affichmore = "SELECT pseudo, texte, `date` FROM commentaire WHERE id = '$ID_ROW'";
+
 
 $pseud = isset($_POST['nom']) ? $_POST['nom'] : NULL;
 $mail = isset($_POST['mail']) ? $_POST['mail'] : NULL;
 $text = isset($_POST['comments']) ? $_POST['comments'] : NULL;
 
 
+$verif = false;
 
-$sql = "INSERT INTO commentaire (pseudo, email, texte, `date`) VALUES ('$pseud', '$mail', '$text', '$today')";
+$sql = "INSERT INTO commentaire (pseudo, email, texte, `date`, id_article) VALUES ('$pseud', '$mail', '$text', '$today','$ID_ART')";
 
 
-if (isset($_POST["btnSubmit"]) || isset($ID_ROW)) {
+if (isset($_POST["btnSubmit"]) || isset($ID_ROW)) { //Afficher plus du texte
 
 
 
@@ -144,31 +153,78 @@ if (isset($_POST["btnSubmit"]) || isset($ID_ROW)) {
         }
 
 }
-elseif (isset($_POST['Submit1']))
+elseif (isset($_POST['Submit1']))//Ajouter un commentaire
 
 {
+    if (empty($pseud) || empty($mail) || empty($text) ){
     
-		if ($conn->query($sql) == true) { // Exécution code MySql
-            goto donne;
-            echo "<br><br>Merci pour votre commentaire";
-            
-		} else {
-            goto donne;
-			echo "<br>Error: " . $sql . "<br>" . $conn->error;
-        }
+		
+        //<!--<p class="text-center">Erreur : Une ou plusieurs case est vide</p>-->
+        $verif = "2";
         
+    }
+    else
+    {   
+        if ($conn->query($sql) == true ) { // Exécution code MySql
+                    
+            //echo "<br><br>Merci pour votre commentaire";
+            $verif = "1";
+            
+        } else {
+            
+            echo "<br>Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
 }    
- else {
- donne:
-    $result = $conn->query($affich);
-
+ 
+   
+if (isset($_POST["submit"]) || isset($ID_ART)) {
+    $result = $conn->query($affichart);
     if ($result->num_rows > 0) {
+
+        ?>
+                
+        <div class='container' align="center">
+        
+
+        <?php 
+        echo '<p></p>';
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+
+
+            $identifiant = $row["id"];
+           
+
+            echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="50" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+
+            ?>
+            <br/>
+            <?php
+            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="50" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+
+            ?>
+            <br/>
+           
+            <p></p>
+
+                  
+           
+            <?php
+
+        }
+    } else {
+        print "0 resultats trouvés";
+    }
+
+    $result = $conn->query($affichcomm);
+    if ($result->num_rows > 0) {//Afficher les commentaires
 
         echo '<p></p>';
         // output data of each row
         ?>
 
-            <div class="container" >
+            <div class="container" style="width:50%;">
             <div class="row">
            <u> <p><?php print htmlspecialchars($result->num_rows); ?> commentaires</p> </u>
             <table class="table table-bordered"  >
@@ -194,12 +250,13 @@ elseif (isset($_POST['Submit1']))
     
     
         <td style="word-break:break-all;" ><?php print htmlspecialchars($limitedtext);
+
             if (strlen($row["texte"]) > $charlimit) {
         // echo ' ...<a href="" >' ."Read More". '</a>';
 
 
                                                 ?>
-                <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post" >
+                <form action="commentaire.php?readmoreid=<?php echo htmlspecialchars($identifiant);?>" method="post" >
                     
                     <input  name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
                     <!--<input name="btnSubmit"  type="submit" value="Lire Plus">-->
@@ -231,19 +288,26 @@ elseif (isset($_POST['Submit1']))
         </table>
     </div>
 </div>
+
+<?php 
+
+
+if ($verif == "1") { ?> <p class="text-center">Merci pour votre commentaire</p> <?php } 
+elseif ($verif == "2"){
+    ?> <p class="text-center">Erreur : Une ou plusieurs case est vide</p> <?php
+}
+?>
 <br/>
 
 
-
-   
-
-
 <h4 align="center" class="">Ajouter un commentaire</h4>
+
+
 <br/>
 
    <div class="form-group; container" style="width:50%;">
     
-        <form id="formulaire" action="commentaire.php" method="post" >
+        <form id="formulaire" action="commentaire.php?id=<?php echo htmlspecialchars($ID_ART);?>" method="post" >
             
         
             <div class="form-group row">
@@ -264,7 +328,7 @@ elseif (isset($_POST['Submit1']))
                 <label for="exampleTextarea">Commentaire</label>
                 <textarea name="comments" class="form-control" id="exampleTextarea" rows="3" ></textarea>
             </div>
-                
+  
             <input class="btn btn-primary" type="submit" value="Envoyer" name="Submit1">
         </form> 
         <p></p>
