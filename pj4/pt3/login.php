@@ -55,7 +55,7 @@ font-size: 50px;
 
    <div class="form-group">
     
-        <form id="formulaire" action="login.php" method="post">
+        <form id="formulaire" action="acceslogin.php" method="post">
             
         
                 id : <input type="text" name="LOGIN_ID" maxlength="10" style="width: 150px" placeholder="LOGIN">
@@ -82,23 +82,11 @@ font-size: 50px;
 
 <?php
 
-$IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
-$IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
+$conf = isset($_GET['verif']) ? $_GET['verif'] : null;
 
-$IDVRAI = "root";
-$MDPVRAI = "root";
-
-
-if (isset($_POST['Submit1'])) {
-
-    if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI) {
-        header('Location: acceslogin.php');
-
-    } else {
-        echo '<p class="text-center"> ID ou MDP erroné </p>';
-    }
-
-
+if ($conf == true)
+{
+    echo '<p class="text-center"> ID ou MDP erroné </p>';
 }
 
 

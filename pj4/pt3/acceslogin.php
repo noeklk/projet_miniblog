@@ -61,10 +61,6 @@ font-size: 50px;
         window.history.replaceState( null, null, window.location.href );
     }
 
-    function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
-}
 </script>
 
 </body>
@@ -73,96 +69,131 @@ font-size: 50px;
 
 <?php
 
-date_default_timezone_set('UTC');
+$IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
+$IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
+$conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
 
-
-$today = date("d-m-Y");
-
-
-$identifiant = "0";
-
-
-
-
-$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
-$titr = isset($_POST['titre']) ? $_POST['titre'] : null;
-$comment = isset($_POST['comments']) ? $_POST['comments'] : null;
+$IDVRAI = "root";
+$MDPVRAI = "root";
 
 
 
 
-
-///////////////////////////////////////
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "miniblogpt2";
-
-
-// Connexion au serveur MySQL
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
-$affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
+    if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
 
 
 
-$result = $conn->query($affich);
+        
+        date_default_timezone_set('UTC');
 
 
-if ($result->num_rows > 0) {
+        $today = date("d-m-Y");
+        
+        
+        $identifiant = "0";
+        
+        
+        
+        
+        $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+        $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
+        $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
+        
+        
+        
+        
+        
+        ///////////////////////////////////////
+        
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "miniblogpt2";
+        
+        
+        // Connexion au serveur MySQL
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
+        $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
+        
+        
+        
+        $result = $conn->query($affich);
+        
+        
+        if ($result->num_rows > 0) {
+        
+            echo '<p></p>';
+                // output data of each row
+            while ($row = $result->fetch_assoc()) {
+        
+        
+                $identifiant = $row["id"];
+                echo "<div class='container'>";
+                echo "<div class='res' width: auto; height:auto>";
+        
+        
+                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+        
+                echo '<br/>';
+                echo '<textarea style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+        
+                ?><div >
+                                <form action="suppression.php" method="post" class="php">
+                                    <p>  
+                                        
+                                        <input type="hidden" name="verif_admin"  value="true">
+                                        <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                        <input type="submit" value="supprimer">
+                                    </p>
+                                </form>
+                                <form action="edition.php" method="post" class="php">
+                                    <p>  
+                                        
+                                        <input type="hidden" name="verif_admin" value="true">
+                                        <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                        <input type="submit" value="editer">
+                                    </p>
+                                </form>
+                                </div>
+                                <?php
+        
+        
+                                echo '<p></p>';
+        
+                                echo "</div>";
+                                echo "</div>";
+        
+        
+        
+                            }
+                        } else {
+                            print "0 resultats trouvés";
+                        }
+        
+        
+        
+                        $conn->close();
 
-    echo '<p></p>';
-        // output data of each row
-    while ($row = $result->fetch_assoc()) {
-
-
-        $identifiant = $row["id"];
-        echo "<div class='container'>";
-        echo "<div class='res' width: auto; height:auto>";
-
-
-        echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-
-        echo '<br/>';
-        echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-
-        ?><div >
-                        <form action="suppression.php" method="post" class="php">
-                            <p>  
-                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                <input type="submit" value="supprimer">
-                            </p>
-                        </form>
-                        <form action="edition.php" method="post" class="php">
-                            <p>  
-                                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                <input type="submit" value="editer">
-                            </p>
-                        </form>
-                        </div>
-                        <?php
-
-
-                        echo '<p></p>';
-
-                        echo "</div>";
-                        echo "</div>";
 
 
 
-                    }
-                } else {
-                    print "0 resultats trouvés";
-                }
+
+
+    } else {
+        header('Location: login.php?verif=true');
+        //
+    }
 
 
 
-                $conn->close();
+
+
+
                 ?>
 
