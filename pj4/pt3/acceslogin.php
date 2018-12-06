@@ -10,7 +10,7 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="assets/css/Basic-Header.css">
     <!-- Bootstrap CSS -->
    
 
@@ -52,16 +52,21 @@ font-size: 50px;
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<form align="right" action="article.php" method="POST">
-		
-        <input class="btn btn-outline-primary" type="submit"  value="accueil">
-        
-    </form>
+<header>
+<div>
+        <nav class="navbar navbar-default navigation-clean-button">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Backend</a>
 
-<div id="result"></div>
-
-<h1 align="center" class="">Projet n°4 Noé - PHPMYADMIN</h1>
-
+                </div>
+                      
+                    <p class="navbar-text navbar-right actions">
+                    <a class="btn btn-default action-button" role="button" href="article.php">Accueil</a></p>
+                    
+            </div>
+        </nav>
+</div>
+</header>
 
     <script type="text/javascript">
     if ( window.history.replaceState ) {

@@ -20,8 +20,25 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" href="assets/css/Basic-Header.css">
 </head>
 <body>
+
+<header>
+<div>
+        <nav class="navbar navbar-default navigation-clean-button">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Login</a>
+
+                </div>
+                      
+                    <p class="navbar-text navbar-right actions">
+                    <a class="btn btn-default action-button" role="button" href="article.php">Accueil</a></p>
+                    
+            </div>
+        </nav>
+</div>
+</header>
 	
 	<div class="limiter">
 		<div class="container-login100">

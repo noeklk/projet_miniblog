@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-   
+    <link rel="stylesheet" href="assets/css/Basic-Header.css">
   
 
 
@@ -45,15 +45,21 @@
 
 <body >
 
-<form align ="right" action="article.php">
-            
-            <input class="btn btn-outline-primary" type="submit" value="accueil">
-                
-    </form>
-    
-    
-<h1 align="center"  class="">Projet n°5 Noé ET4 commentaire-fusion</h1>
+<header>
+<div>
+        <nav class="navbar navbar-default navigation-clean-button">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Commentaire</a>
 
+                </div>
+                      
+                    <p class="navbar-text navbar-right actions">
+                    <a class="btn btn-default action-button" role="button" href="article.php">Accueil</a></p>
+                    
+            </div>
+        </nav>
+</div>
+</header>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -226,8 +232,8 @@ if (isset($_POST["submit"]) || isset($ID_ART)) {
 
             <div class="container" style="width:50%;">
             <div class="row">
-           <u> <p><?
-           php print htmlspecialchars($result->num_rows);
+           <u> <p><?php
+           print htmlspecialchars($result->num_rows);
            if ($result->num_rows > 1){echo ' commentaires';}else{echo ' commentaire';} 
            ?> </p> </u>
            

@@ -2,15 +2,20 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
    
     <title> Mini Blog PT2</title>
-
-	<meta charset="utf-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="assets/css/Basic-Header.css">
 <style>
+      button{
 
+background-image:none;
+padding: 0;
+border: none;
+background: none;
+}
 
 
 </style>
@@ -19,33 +24,6 @@
 
 <body>
 
-
-
-   <!-- <form align="right" action="login.php" method="POST">
-            
-                    <input class="btn btn-outline-primary" type="submit" value="login">
-                        
-                </form>
-
-            <h1 align="center" class="">Projet n°4 Noé - Final</h1>
-            <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">Projet n°4 Noé - Final</h1>
-                <p class="lead">MiniBlog</p>
-            </div>
-            
-            </div>
-
-            <div class="jumbotron">
-            <h1 class="display-4">Projet n°4 Noé - Final</h1>
-            <p class="lead"></p>
-            <hr class="my-4">
-            <p>Bouton login pour se connecter et éditer les informations sql</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="login.php" role="button">login</a>
-            </p>
-</div>
--->
 <header>
 <div>
         <nav class="navbar navbar-default navigation-clean-button">
@@ -54,8 +32,8 @@
 
                 </div>
                       
-                    <p class="navbar-text navbar-right actions"><a class="navbar-link login" href="login.php">Log In</a> 
-                    <a class="btn btn-default action-button" role="button" href="">Sign Up</a></p>
+                    <p class="navbar-text navbar-right actions"><a class="navbar-link login" href="login.php">Se connecter</a> 
+                    <a class="btn btn-default action-button" role="button" href="">S'inscrire</a></p>
                     
             </div>
         </nav>
@@ -116,31 +94,38 @@ $today = date("d-m-Y");
 
 $identifiant = "0";
 
-
-$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
-$titr = isset($_POST['titre']) ? $_POST['titre'] : null;
-$comment = isset($_POST['comments']) ? $_POST['comments'] : null;
-
-
-
-
-
-///////////////////////////////////////
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "miniblogpt2";
 
+$conn = new mysqli($servername, $username, $password, $dbname) or die($conn);
+
+
+$auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
+$titr = isset($_POST['titre']) ? $_POST['titre'] : null;
+$comment = isset($_POST['comments']) ? $_POST['comments'] : null;
+
+$_comment = mysqli_real_escape_string($conn,$comment);
+
+
+
+$charlimit = 60;
+$limitedtext = "";
+
+///////////////////////////////////////
+
+
+
 
 // Connexion au serveur MySQL
-$conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
+$sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$_comment', '$today')";
 $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
 
 
@@ -208,25 +193,40 @@ if ($conn->query($sql) == true) { // Exécution code MySql
         // output data of each row
         while ($row = $result->fetch_assoc()) {
 
-
+            $limitedtext = $row["texte"];
             $identifiant = $row["id"];
+            if (strlen($limitedtext) > $charlimit) {
+
+                $limitedtext = substr($limitedtext, 0, $charlimit) . "...";
+              
+
+            }
            
-            ?>  <div class="col-sm">  <?php
-            echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
+            
+           
+            ?>  <div class="col-sm-4">
+            <div>
+            <textarea style="resize:none; border:solid 1.5px black;overflow:hidden;" readonly="readonly" cols="30" rows="2" class="box; rounded"><?php
+            echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"]; 
 
             ?>
+             
+             </textarea>
+             
             <br/>
             <?php
-            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="30" rows="3" class="box; rounded">' . $limitedtext . '</textarea>';
             
             ?>
             <br/>
-            <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post" class="">
+            <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post">
                             <p>  
                                 <input  name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                <input type="submit" value="Accéder à cet article">
+                                <button type="submit" class="btn btn-outline-primary">Accéder au contenu</button>
+                               
                             </p>
                         </form>
+                        </div>
 				         <p></p>
 
                   </div>
