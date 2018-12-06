@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+   
     <title> Mini Blog PT2</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/Basic-Header.css">
+<style>
 
-    <style>
 
-     
-        #formulaire{
-            text-align: center;
-        }
 
-        h1{
-        font-family: 'Open Sans', sans-serif;
-        font-size: 50px;
-        }
+</style>
 
-        #log{
-            position: absolute;
-            top: 20px;
-            right: 20px;  
-        }
-
-        .res{
-            position: relative;     
-            left : 35%;  
-        }
-
-    </style>
 </head>
 
 <body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<div>
-    <form align="right" action="login.php" method="POST">
-            
-        <input class="btn btn-outline-primary" type="submit" value="login">
-            
-    </form>
 
-<h1 align="center" class="">Projet n°4 Noé - Final</h1>
 
+   <!-- <form align="right" action="login.php" method="POST">
+            
+                    <input class="btn btn-outline-primary" type="submit" value="login">
+                        
+                </form>
+
+            <h1 align="center" class="">Projet n°4 Noé - Final</h1>
+            <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Projet n°4 Noé - Final</h1>
+                <p class="lead">MiniBlog</p>
+            </div>
+            
+            </div>
+
+            <div class="jumbotron">
+            <h1 class="display-4">Projet n°4 Noé - Final</h1>
+            <p class="lead"></p>
+            <hr class="my-4">
+            <p>Bouton login pour se connecter et éditer les informations sql</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="login.php" role="button">login</a>
+            </p>
 </div>
+-->
+<header>
+<div>
+        <nav class="navbar navbar-default navigation-clean-button">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Final</a>
 
-   <div class="form-group">
-    
-        <form id="formulaire" action="article.php" method="post">
+                </div>
+                      
+                    <p class="navbar-text navbar-right actions"><a class="navbar-link login" href="login.php">Log In</a> 
+                    <a class="btn btn-default action-button" role="button" href="">Sign Up</a></p>
+                    
+            </div>
+        </nav>
+</div>
+</header>
+
+<h4 align="center" style="padding-top:20px;">Veuillez entrez votre contenu</h4>
+
+   <div class="container form-group" align="center" style="padding-top:40px;">
+
+   
+
+        <form  action="article.php" method="post">
             
         
                 Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" placeholder="nom d'Auteur">
@@ -77,19 +91,21 @@
         </form>
     </div>
 
-    <script type="text/javascript">
+
+
+<script type="text/javascript">
+
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
 
-    function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
-}
-
         </script>
-    </body>
-</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
 <?php
 
 date_default_timezone_set('UTC');
@@ -186,7 +202,7 @@ if ($conn->query($sql) == true) { // Exécution code MySql
                 
         <div class='container' align="center">
         
-
+        <div class="row">
         <?php 
         echo '<p></p>';
         // output data of each row
@@ -195,14 +211,14 @@ if ($conn->query($sql) == true) { // Exécution code MySql
 
             $identifiant = $row["id"];
            
-
+            ?>  <div class="col-sm">  <?php
             echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
 
             ?>
             <br/>
             <?php
             echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-
+            
             ?>
             <br/>
             <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post" class="">
@@ -213,7 +229,7 @@ if ($conn->query($sql) == true) { // Exécution code MySql
                         </form>
 				         <p></p>
 
-                  
+                  </div>
            
             <?php
 
@@ -223,7 +239,7 @@ if ($conn->query($sql) == true) { // Exécution code MySql
     }
 ?>
   
-
+  </div>
 </div>
 <?php
 }
@@ -231,3 +247,5 @@ if ($conn->query($sql) == true) { // Exécution code MySql
 $conn->close();
 ?>
 
+ </body>
+</html>

@@ -1,101 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <title> Mini Blog PT2</title>
-
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    
-
-
-<style>
-
-form.php {
-    display: inline-block; //Or display: inline; 
-}
-#formulaire{
-    text-align: center;
-}
-
-h1{
-font-family: 'Open Sans', sans-serif;
-font-size: 50px;
-}
-
-
-.res{
-      position: relative;     
-      left : 35%;  
-}
-</style>
-
+	<title>Mini Blog PT4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="images/img-01.png" alt="IMG">
+				</div>
 
-<body >
+				<form class="login100-form validate-form" action="acceslogin.php" method="post">
+					<span class="login100-form-title">
+						Member Login
+					</span>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+					<div class="wrap-input100 validate-input" data-validate = "L'ID est nécessaire">
+						<input class="input100" type="text" name="LOGIN_ID" maxlength="15" placeholder="ID">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
 
-<form align="right" action="article.php" method="POST">
+					<div class="wrap-input100 validate-input" data-validate = "Le mot de passe est nécessaire">
+						<input class="input100" type="password" name="LOGIN_MDP" maxlength="15" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit" name="btnSubmit" >
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+						<?php
+
+						$conf = isset($_GET['verif']) ? $_GET['verif'] : null;
+
+						if ($conf == true)
+						{
+							echo '<p class="text-center"> ID ou MDP erroné </p>';
+						}
+
+						?>
+					</div>
+					<i class="fa fa-home" aria-hidden="true"></i>
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+				
+			</div>
 		
-        <input class="btn btn-outline-primary" type="submit"  value="accueil">
-        
-    </form>
+		</div>
+	
+	</div>
+	
+	
 
-<div id="result"></div>
+	
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1	
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 
-<h1 align="center" class="">Projet n°4 Noé - admin login</h1>
 
-   <div class="form-group">
-    
-        <form id="formulaire" action="acceslogin.php" method="post">
-            
-        
-                id : <input type="text" name="LOGIN_ID" maxlength="10" style="width: 150px" placeholder="LOGIN">
-                <br><br>
-                   
-                mdp : <input type="password" name="LOGIN_MDP" maxlength="10" placeholder="PASSWORD">
-                <br><br>
-                 
-            
-                <br><br>
-            <input class="btn btn-primary" type="submit" value="Connection" name="Submit1">
-        </form> 
-    </div>
-
-    <script type="text/javascript">
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-
-</script>
 
 </body>
 </html>
-
-<?php
-
-$conf = isset($_GET['verif']) ? $_GET['verif'] : null;
-
-if ($conf == true)
-{
-    echo '<p class="text-center"> ID ou MDP erroné </p>';
-}
-
-
-
-
-?>
-
-
-
-
-
 

@@ -64,12 +64,28 @@ font-size: 50px;
         
     </form>
 
-    <form align="right" action="acceslogin.php" method="POST">
-		
+    <?php
+$conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
+if($conf == true){
+?>
+<form align="right" action="acceslogin.php" method="POST">
+		<input type="hidden" name="verif_admin" value="true">
+        <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
+        
+</form>
+<?php
+}
+else{
+?>
+    <form align="right" action="login.php" method="GET">
+        <input type="hidden" name="verif" value="true">
         <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
         
     </form>
+<?php  
+}
 
+    ?>
 
 
 

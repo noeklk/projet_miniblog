@@ -226,7 +226,12 @@ if (isset($_POST["submit"]) || isset($ID_ART)) {
 
             <div class="container" style="width:50%;">
             <div class="row">
-           <u> <p><?php print htmlspecialchars($result->num_rows); ?> commentaires</p> </u>
+           <u> <p><?
+           php print htmlspecialchars($result->num_rows);
+           if ($result->num_rows > 1){echo ' commentaires';}else{echo ' commentaire';} 
+           ?> </p> </u>
+           
+           
             <table class="table table-bordered"  >
             <tbody>
 
@@ -280,7 +285,7 @@ if (isset($_POST["submit"]) || isset($ID_ART)) {
 
         }
     } else {
-        print "0 resultats trouvés";
+        print "0 commentaires trouvés";
     }
 }
 ?> 
@@ -300,7 +305,7 @@ elseif ($verif == "2"){
 <br/>
 
 
-<h4 align="center" class="">Ajouter un commentaire</h4>
+<h4 align="center">Ajouter un commentaire</h4>
 
 
 <br/>

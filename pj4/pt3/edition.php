@@ -136,7 +136,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $editdate = "edit : $today ";
         ?><form  action="editiondone.php" method="post" style="text-align: center;">
-        <div class="container; form-group" >
+        <div class="container form-group" >
              <div class='res' width: auto; height:auto>
 
                 Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" value="<?php echo htmlspecialchars($row["auteur"]); ?>">
@@ -154,7 +154,7 @@ if ($result->num_rows > 0) {
                 <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($ID_ROW); ?>">
 
                 <br><br>
-
+                <input type="hidden" name="verif_admin" value="true">
                 <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
                 <?php
                 

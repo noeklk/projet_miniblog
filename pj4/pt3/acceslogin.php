@@ -5,6 +5,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title> Mini Blog PT2</title>
+    
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,12 +17,20 @@
 
 <style>
 
-form.php {
-    display: inline-block; 
+
+
+
+.php {
     
+    
+    display: inline-block;
 }
-#formulaire{
-    text-align: center;
+
+ button{
+
+
+border: none;
+background: none;
 }
 
 h1{
@@ -30,10 +40,7 @@ font-size: 50px;
 
 
 
-.res{
-      position: relative;     
-      left : 35%;  
-}
+
 </style>
 
 </head>
@@ -63,9 +70,6 @@ font-size: 50px;
 
 </script>
 
-</body>
-
-</html>
 
 <?php
 
@@ -128,54 +132,68 @@ $MDPVRAI = "root";
         
         if ($result->num_rows > 0) {
         
-            echo '<p></p>';
+            
+            ?>
+              
+
+                        <div class='container' align="center" style="padding-top:50px;">
+                        <div class="row">
+            <?php
                 // output data of each row
             while ($row = $result->fetch_assoc()) {
         
         
                 $identifiant = $row["id"];
-                echo "<div class='container'>";
-                echo "<div class='res' width: auto; height:auto>";
+                
         
-        
+                ?>  <div class="col-sm">  <?php
                 echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
         
-                echo '<br/>';
-                echo '<textarea style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
+                ?><br> <?php
+                echo '<textarea style="resize: vertical; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
         
-                ?><div >
+                ?>
+                
+                <p>
                                 <form action="suppression.php" method="post" class="php">
-                                    <p>  
+                                     
                                         
                                         <input type="hidden" name="verif_admin"  value="true">
                                         <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                        <input type="submit" value="supprimer">
-                                    </p>
+                                        <button  type="submit" value="supprimer"> <a class="btn btn-danger">
+                                        <i class="fa fa-trash-o fa-lg"></i> Delete</a></button>
+                                        
+                                    
                                 </form>
                                 <form action="edition.php" method="post" class="php">
-                                    <p>  
+                                    
                                         
                                         <input type="hidden" name="verif_admin" value="true">
                                         <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                        <input type="submit" value="editer">
-                                    </p>
+                                        <button type="submit" value="editer"><a class="btn btn-primary">
+                                            <i class="fa fa-pencil fa-lg"></i> Edit</a> </button>
+                                        <!--<a class="btn btn-danger" href="#">
+                                        <i class="fa fa-trash-o fa-lg"></i> Delete</a>-->
+                                    
                                 </form>
-                                </div>
+                </p>
+                                <br />
+                                <br />
+                                
+
+                            </div>
+
                                 <?php
-        
-        
-                                echo '<p></p>';
-        
-                                echo "</div>";
-                                echo "</div>";
-        
         
         
                             }
                         } else {
                             print "0 resultats trouvés";
                         }
-        
+        ?>
+                           </div>
+                        </div>
+        <?php
         
         
                         $conn->close();
@@ -197,3 +215,6 @@ $MDPVRAI = "root";
 
                 ?>
 
+</body>
+
+</html>
