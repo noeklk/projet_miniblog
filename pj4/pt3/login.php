@@ -92,7 +92,7 @@
 
 						?>
 					</div>
-					<i class="fa fa-home" aria-hidden="true"></i>
+					
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">
 							Create your Account

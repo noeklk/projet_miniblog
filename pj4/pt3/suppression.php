@@ -15,6 +15,7 @@
 <style>
 
 
+
 #formulaire{
     text-align: center;
 
@@ -73,7 +74,9 @@ cursor: pointer;
                     $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
                     if($conf == true){
                     ?>
-                    <form align="right" action="acceslogin.php" method="POST">
+                   
+                      
+                    <form class="navbar-input-group navbar-form navbar-left"  action="acceslogin.php" method="POST">
                             <input type="hidden" name="verif_admin" value="true">
                             <button type="submit"><a class="navbar-link login">Accueil admin</a></button>
                     </form>
@@ -82,16 +85,18 @@ cursor: pointer;
                     }
                     else{
                     ?>
-                        <form align="right" action="login.php" method="GET">
-                            <input type="hidden" name="verif" value="true">
+                    
+                        <form class="navbar-input-group navbar-form navbar-left" action="login.php" method="GET">
+                            <input type="hidden" name="verif" value="true" >
                             <button type="submit"><a class="navbar-link login">Accueil admin</a></button>
                         </form>
+                       <!--<a class="navbar-link login">Accueil admin</a>-->
                     <?php  
                     }
 
                     ?>
                     <a class="btn btn-default action-button" role="button" href="article.php">Accueil invité</a></p>
-                    
+                </p>
             </div>
         </nav>
 </div>
