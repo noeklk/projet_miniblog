@@ -166,14 +166,15 @@ $MDPVRAI = "root";
         
                 ?>
             <div class="col-sm">
-                <?php
-                echo '<textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded">' . $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] . '</textarea>'; //TRAVAILLE ICI 08/11
-        
-                ?><br>
-                <?php
-                echo '<textarea style="resize: vertical; border:solid 1.5px black" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
-        
-                ?>
+
+                <textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded"><?php echo $row['titre'] . "\n" . $row['auteur'] . ", " . $row['date'];?></textarea>
+
+                <br>
+
+                <textarea style="resize: vertical; border:solid 1.5px black" readonly="readonly" cols="40" rows="3"
+                    class="box; rounded"><?php echo $row['texte']; ?></textarea>
+
+
 
                 <p>
                     <p>

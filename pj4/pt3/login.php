@@ -82,7 +82,7 @@ body{
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="L'ID est nécessaire">
-						<input class="input100" type="text" name="LOGIN_ID" maxlength="15" placeholder="ID">
+						<input class="input100" type="text" name="LOGIN_ID" maxlength="15" placeholder="ID" autofocus>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>

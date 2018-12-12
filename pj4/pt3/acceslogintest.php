@@ -21,11 +21,10 @@
 
 
 
-
         .php {
-    
-    
-    display: inline-block;
+
+
+display: inline-block;
 }
 
  button{
@@ -82,6 +81,7 @@ font-size: 50px;
 
     <?php
 
+    
 $IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
 $IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
 $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
@@ -91,8 +91,7 @@ $MDPVRAI = "root";
 
 
 
-
-    if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
+if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
 
 
 
