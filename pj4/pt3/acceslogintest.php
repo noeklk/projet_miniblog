@@ -85,7 +85,7 @@ font-size: 50px;
 $IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
 $IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
 $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
-//$conf = true; // A ENLEVER APRES TESTS
+$conf = true; // A ENLEVER APRES TESTS
 $IDVRAI = "root";
 $MDPVRAI = "root";
 
@@ -112,6 +112,8 @@ $MDPVRAI = "root";
         $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
         $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
         $ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : null;
+        $delete = "DELETE from blog2 where id= $ID_ROW";
+        
         
         
         
@@ -122,7 +124,7 @@ $MDPVRAI = "root";
         $username = "root";
         $password = "";
         $dbname = "miniblogpt2";
-        $delete = "DELETE from blog2 where id= $ID_ROW";
+        
         
         // Connexion au serveur MySQL
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -134,20 +136,25 @@ $MDPVRAI = "root";
         $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
         $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
         
-        if (isset($_POST['suppr'])) { 
         
-            if ($conn->query($delete) === true) { // Exécution code MySql
         
-                
-            } else {
-            
-                echo "<br>Error: " . $delete . "<br>" . $conn->error;
-            }
+       
+
+
+if (isset($_POST['suppr'])) { 
         
-        }
+    if ($conn->query($delete) === true) { // Exécution code MySql
+
         
-        $result = $conn->query($affich);
-        
+    } else {
+    
+        echo "<br>Error: " . $delete . "<br>" . $conn->error;
+    }
+
+}
+
+$result = $conn->query($affich);
+
         if ($result->num_rows > 0) {
         
             
@@ -176,57 +183,56 @@ $MDPVRAI = "root";
                 ?>
 
                 <p>
-                    <p>
 
-                        <!-- BOUTON ACTIONNAGE MODAL -->
-                        <p class="php">
-                            <button type="button" value="supprimer" data-toggle="modal" data-target="#exampleModal">
-                                <a class="btn btn-danger">
-                                    <i class="fa fa-trash-o fa-lg"></i> Delete</a></button>
-                        </p>
-                        <!-- FIN BOUTON ACTIONNAGE MODAL -->
-                        <!-- DEBUT MODAL -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Confirmez vous la suppression de l'article ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez la
-                                            suppression</button>
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="verif_admin" value="true">
-                                            <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                            <button type="submit" class="btn btn-danger" name="suppr">Oui</button>
-                                        </form>
-                                    </div>
+                    <!-- BOUTON ACTIONNAGE MODAL -->
+                    <p class="php">
+                        <button type="button" value="supprimer" data-toggle="modal" data-target="#exampleModal">
+                            <a class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-lg"></i> Delete</a></button>
+                    </p>
+                    <!-- FIN BOUTON ACTIONNAGE MODAL -->
+                    <!-- DEBUT MODAL -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Confirmez vous la suppression de l'article ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez la
+                                        suppression</button>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="verif_admin" value="true">
+                                        <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                                        <button type="submit" class="btn btn-danger" name="suppr">Oui</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- FIN MODAL -->
-                        <form action="edition.php" method="post" class="php">
+                    <!-- FIN MODAL -->
+                    <form action="edition.php" method="post" class="php">
 
 
-                            <input type="hidden" name="verif_admin" value="true">
-                            <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                            <button type="submit" value="editer"><a class="btn btn-primary">
-                                    <i class="fa fa-pencil fa-lg"></i> Edit</a> </button>
-                            <!--<a class="btn btn-danger" href="#">
+                        <input type="hidden" name="verif_admin" value="true">
+                        <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+                        <button type="submit" value="editer"><a class="btn btn-primary">
+                                <i class="fa fa-pencil fa-lg"></i> Edit</a> </button>
+                        <!--<a class="btn btn-danger" href="#">
                                         <i class="fa fa-trash-o fa-lg"></i> Delete</a>-->
 
-                        </form>
-                    </p>
-                    <br />
-                    <br />
+                    </form>
+                </p>
+                <br />
+                <br />
 
 
             </div>

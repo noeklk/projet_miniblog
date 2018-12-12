@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title> Mini Blog PT2</title>
 
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="assets/css/Basic-Header.css">
     <!-- Bootstrap CSS -->
-   
 
 
-<style>
 
+    <style>
+
+        .navigation-clean-button{
+  background-color: rgba(0,0,0,.7);
+  padding-top:10px;
+  padding-bottom:20px;
+  color:#fff;
+  border-radius:0px;
+  box-shadow:none;
+  border: none;
+  margin-bottom:0;
+}
+
+button{
+
+background-image:none;
+padding: 0;
+border: none;
+background: none;
+margin-right: -20px;
+text-decoration: none;
+color: #fff;
+cursor: pointer;
+}
 
 #formulaire{
     text-align: center;
@@ -34,8 +58,8 @@ font-size: 50px;
       position: relative;
 }
 </style>
-<script>
-    if ( window.history.replaceState ) {
+    <script>
+        if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
    
@@ -43,48 +67,68 @@ font-size: 50px;
 </script>
 </head>
 
-<body >
+<body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
- <form align="right" action="article.php" method="POST">
-		
-        <input class="btn btn-outline-primary" type="submit"  value="accueil invite">
-        
-    </form>
-    <?php
-$conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
-if($conf == true){
-?>
-<form align="right" action="acceslogin.php" method="POST">
-		<input type="hidden" name="verif_admin" value="true">
-        <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
-        
-</form>
-<?php
-}
-else{
-?>
-    <form align="right" action="login.php" method="GET">
-        <input type="hidden" name="verif" value="true">
-        <input class="btn btn-outline-primary" type="submit"  value="accueil admin">
-        
-    </form>
-<?php  
-}
+    <header>
+        <div>
+            <nav class="navbar navbar-default navigation-clean-button">
+                <div class="container">
+                    <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Suppression Confirmer</a>
 
-    ?>
-    
+                    </div>
+
+                    <p class="navbar-text navbar-right actions">
+                        <?php
+                     
+                    $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
+                    if($conf == true){
+                    ?>
 
 
+                        <form class="navbar-input-group navbar-form navbar-left" action="acceslogin.php" method="POST">
+                            <input type="hidden" name="verif_admin" value="true">
+                            <button type="submit">
+                                <p class="navbar-text navbar-right actions"><a class="navbar-link login">Accueil admin</a>
+                            </button>
+                        </form>
+
+                        <?php
+                    }
+                    else{
+                    ?>
+
+                        <form class="form" action="login.php" method="GET">
+                            <input type="hidden" name="verif" value="true">
+                            <button type="submit">
+                                <p class="navbar-text navbar-right actions"><a class="navbar-link login">Accueil admin</a>
+                            </button>
+                        </form>
+                        <!--<a class="navbar-link login">Accueil admin</a>-->
+                        <?php  
+                    }
+
+                    ?>
+                        <a class="btn btn-default action-button" role="button" href="article.php">Accueil invité</a>
+                    </p>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </header>
 
 
 
-<h1 align="center" class="">Projet n°4 Noé - Edition SQL</h1>
-<div id="result"></div>
-    
+
+    <h1 align="center" class="">Projet n°4 Noé - Edition SQL</h1>
+    <div id="result"></div>
+
 </body>
 
 </html>
@@ -135,28 +179,31 @@ if ($result->num_rows > 0) {
 // output data of each row
     while ($row = $result->fetch_assoc()) {
         $editdate = "edit : $today ";
-        ?><form  action="editiondone.php" method="post" style="text-align: center;">
-        <div class="container form-group" >
-             <div class='res' width: auto; height:auto>
+        ?>
+<form action="editiondone.php" method="post" style="text-align: center;">
+    <div class="container form-group">
+        <div class='res' width: auto; height:auto>
 
-                Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" value="<?php echo htmlspecialchars($row["auteur"]); ?>">
-                <br><br>
-                
-                Titre: <input type="text" name="titre" maxlength="50" value="<?php echo htmlspecialchars($row["titre"]); ?>">
-                <br><br>
-                Texte: 
-                <div>
-                    <textarea class="rounded" type="text" cols="40" rows="5" name="comments"><?php echo htmlspecialchars($row["texte"]); ?></textarea>
-                </div>
+            Auteur: <input type="text" name="auteur" maxlength="15" style="width: 150px" value="<?php 
+            echo htmlspecialchars($row['auteur']); ?>
+            ">
+            <br><br>
 
-                <input  name="editdate" type="hidden" value="<?php echo htmlspecialchars($editdate); ?>">
+            Titre: <input type="text" name="titre" maxlength="50" value="<?php echo htmlspecialchars($row['titre']); ?>">
+            <br><br>
+            Texte:
+            <div>
+                <textarea class="rounded" type="text" cols="40" rows="5" name="comments"><?php echo htmlspecialchars($row['texte']); ?></textarea>
+            </div>
 
-                <input  name="idrow" type="hidden" value="<?php echo htmlspecialchars($ID_ROW); ?>">
+            <input name="editdate" type="hidden" value="<?php echo htmlspecialchars($editdate); ?>">
 
-                <br><br>
-                <input type="hidden" name="verif_admin" value="true">
-                <input class="btn btn-primary" type="submit" value="Submit" name="Submit1">
-                <?php
+            <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($ID_ROW); ?>">
+
+            <br><br>
+            <input type="hidden" name="verif_admin" value="true">
+            <input class="btn btn-primary" type="submit" value="Editer" name="Submit1">
+            <?php
                 
 
                // echo '<p style ="transform: translateX(-3%)">' . 'Les informations avec l\'id ' . $ID_ROW .  ' ont bien été supprimés' . '</p>';
@@ -165,9 +212,10 @@ if ($result->num_rows > 0) {
 				//echo '<br/>';
                 //echo '<textarea onclick="textAreaAdjust(this)" style="resize: vertical; border:solid 1.5px black; overflow:hidden" readonly="readonly" cols="40" rows="3" class="box; rounded">' . $row["texte"] . '</textarea>';
                 ?>
-            </div>
-         </div>
-         </form> <?php
+        </div>
+    </div>
+</form>
+<?php
 
             }
         } else {
@@ -195,4 +243,3 @@ if ($conn->query($delete) === true) { // Exécution code MySql
 
 
         ?>
-

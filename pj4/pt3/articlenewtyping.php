@@ -2,12 +2,6 @@
 <html>
 
 <head>
-
-    <?php
-    
-    
-    $boites = isset($_POST['boites']) ? $_POST['boites'] : null;
-    ?>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -16,24 +10,20 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="assets/css/Basic-Header.css">
+
     <style>
-
-        #basic-addon2{
-
-        padding: .375rem 1.25rem;
-}
-
-    #basic-addon3{
-
-padding: .375rem 0.38rem;
-}
-
         button{
 
-    background-image:none;
-    padding: 0;
-    border: none;
-    background: none;
+background-image:none;
+padding: 0;
+border: none;
+background: none;
+}
+
+body{
+   
+
+
 }
 
 .boite{
@@ -43,27 +33,12 @@ background-color: #f2f2f2;
 padding: 50px;
 margin-top : 25px;
 width : 650px;
-height : auto;
 }
 
-input[type=submit], button {
+input[type=submit] {
 
 width: 100%;
 }
-
-.listage{
-    border-radius: 10px;
-background-color: #f2f2f2;
-   padding : 25px;
-    
-}
-
-.petitesboites{
-
-width : 234px;
-
-}
-
 
 
 </style>
@@ -71,6 +46,15 @@ width : 234px;
 </head>
 
 <body>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
     <header>
         <div>
@@ -109,7 +93,7 @@ width : 234px;
 
                 <div class="input-group mb-5 form-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2">Titre</span>
+                        <span class="input-group-text" id="basic-addon1">Titre</span>
                     </div>
                     <input type="text" name="titre" maxlength="50" class="form-control" aria-label="Username"
                         aria-describedby="basic-addon1" required>
@@ -118,7 +102,7 @@ width : 234px;
 
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Contenu</span>
+                        <span class="input-group-text">Contenu</span>
                     </div>
                     <textarea type="text" class="form-control" name="comments" rows="4" aria-label="With textarea"
                         required></textarea>
@@ -129,43 +113,16 @@ width : 234px;
             </form>
             <br />
 
+            <form id="formulaire" action="article.php" method="POST">
 
-            <?php
-        if ($boites == "1"){
-                ?>
-
-            <form action="article.php" method="POST">
-
-                <input type="hidden" name="boites" value="0">
-                <input class="btn btn-success" type="submit" value="Cacher informations" name="aa">
-
-            </form>
-            <?php
-        }
-        else{
-            ?>
-            <form action="article.php" method="POST">
-
-                <input type="hidden" name="boites" value="1">
                 <input class="btn btn-success" type="submit" value="Afficher informations" name="Submit2">
 
             </form>
-
-            <?php
-
-
-
-        }
-
-?>
-
         </div>
 
 
     </div>
 
-    <br />
-    <br />
 
     <script type="text/javascript">
         if (window.history.replaceState) {
@@ -173,13 +130,6 @@ width : 234px;
         }
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <?php
 
@@ -203,7 +153,7 @@ $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
 $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
 $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
 
-$_comment = mysqli_real_escape_string($conn,$comment);
+$_comment = mysqli_real_escape_string($conn, $comment);
 
 
 
@@ -237,14 +187,11 @@ if (isset($_POST['Submit1'])) {
 
     <div align="center">
 
-
-
         <?php
 
 print("Bonjour, ");
 
 ?>
-
 
         <strong>
             <?php print htmlspecialchars($auteu); ?></strong>
@@ -287,11 +234,11 @@ if ($conn->query($sql) == true) { // Exécution code MySql
 
         ?>
 
-    <div class="container listage" align="center">
-        <div class="row">
+    <div class='container' align="center">
 
+        <div class="row">
             <?php 
-        
+        echo '<p></p>';
         // output data of each row
         while ($row = $result->fetch_assoc()) {
 
@@ -300,40 +247,39 @@ if ($conn->query($sql) == true) { // Exécution code MySql
             if (strlen($limitedtext) > $charlimit) {
 
                 $limitedtext = substr($limitedtext, 0, $charlimit) . "...";
-              
+
 
             }
-           
-            
-           
+
+
+
             ?>
             <div class="col-sm-4">
-                <div class="petitesboites">
+                <div>
                     <textarea style="resize:none; border:solid 1.5px black;overflow:hidden;" readonly="readonly" cols="30"
                         rows="2" class="box; rounded"><?php
-            echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"]; 
+                                                                                                                                                echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"];
+
+                                                                                                                                                ?>
+             
+            </textarea>
+
+                    <br />
+                    <?php
+            echo '<textarea  style="resize: none; border:solid 1.5px black" readonly="readonly" cols="30" rows="3" class="box; rounded">' . $limitedtext . '</textarea>';
 
             ?>
-             
-             </textarea>
-
                     <br />
-
-                    <textarea style="resize: none; border:solid 1.5px black" readonly="readonly" cols="30" rows="3"
-                        class="box; rounded"> <?php  echo $limitedtext; ?>  </textarea>
-
-
-                    <br />
-                    <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant);?>" method="post">
+                    <form action="commentaire.php?id=<?php echo htmlspecialchars($identifiant); ?>" method="post">
                         <p>
                             <input name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
                             <button type="submit" class="btn btn-outline-primary">Accéder au contenu</button>
 
                         </p>
                     </form>
-
-                    <p></p>
                 </div>
+                <p></p>
+
             </div>
 
             <?php
@@ -342,11 +288,12 @@ if ($conn->query($sql) == true) { // Exécution code MySql
     } else {
         print "0 resultats trouvés";
     }
-?>
+    ?>
 
         </div>
     </div>
     <?php
+
 }
 
 $conn->close();

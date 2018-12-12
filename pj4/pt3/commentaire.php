@@ -272,7 +272,7 @@ if (isset($_POST["submit"]) || isset($ID_ART)) {
                     <input  name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
                     <!--<input name="btnSubmit"  type="submit" value="Lire Plus">-->
                     <button type="submit" name="btnSubmit" >
-                    <img src="readmore.png" style="max-width: 100px;height: auto;>"    />
+                    <img src="readmore.png" style="max-width: 100px;height: auto;>"/>
                     </button>
                 
                  </form>

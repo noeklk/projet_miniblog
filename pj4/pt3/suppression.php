@@ -1,41 +1,30 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title> Mini Blog PT2</title>
 
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="assets/css/Basic-Header.css">
     <!-- Bootstrap CSS -->
-   
-
-<style>
 
 
+    <style>
 
-#formulaire{
-    text-align: center;
-
-
-}
-
-h1{
-
-font-family: 'Open Sans', sans-serif;
-font-size: 50px;
-}
-
-
-
-.res{
-
-      position: relative;
-      
-      left : 35%;
-    
+        .navigation-clean-button{
+  background-color: rgba(0,0,0,.7);
+  padding-top:10px;
+  padding-bottom:20px;
+  color:#fff;
+  border-radius:0px;
+  box-shadow:none;
+  border: none;
+  margin-bottom:0;
 }
 
 button{
@@ -50,62 +39,72 @@ color: #fff;
 cursor: pointer;
 }
 </style>
-<script>
-    if ( window.history.replaceState ) {
+
+    <script>
+        if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
 
 </script>
+
 </head>
 
-<body >
+<body>
 
-<header>
-<div>
-        <nav class="navbar navbar-default navigation-clean-button">
-            <div class="container">
-                <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Suppression Confirmer</a>
+    <header>
+        <div>
+            <nav class="navbar navbar-default navigation-clean-button">
+                <div class="container">
+                    <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Suppression Confirmer</a>
 
-                </div>
-                      
+                    </div>
+
                     <p class="navbar-text navbar-right actions">
-                    <?php
+                        <?php
                      
                     $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
                     if($conf == true){
                     ?>
-                   
-                      
-                    <form class="navbar-input-group navbar-form navbar-left"  action="acceslogin.php" method="POST">
+
+
+                        <form class="navbar-input-group navbar-form navbar-left" action="acceslogin.php" method="POST">
                             <input type="hidden" name="verif_admin" value="true">
-                            <button type="submit"><a class="navbar-link login">Accueil admin</a></button>
-                    </form>
-                    
-                    <?php
+                            <button type="submit">
+                                <p class="navbar-text navbar-right actions"><a class="navbar-link login">Accueil admin</a>
+                            </button>
+                        </form>
+
+                        <?php
                     }
                     else{
                     ?>
-                    
-                        <form class="navbar-input-group navbar-form navbar-left" action="login.php" method="GET">
-                            <input type="hidden" name="verif" value="true" >
-                            <button type="submit"><a class="navbar-link login">Accueil admin</a></button>
+
+                        <form class="form" action="login.php" method="GET">
+                            <input type="hidden" name="verif" value="true">
+                            <button type="submit">
+                                <p class="navbar-text navbar-right actions"><a class="navbar-link login">Accueil admin</a>
+                            </button>
                         </form>
-                       <!--<a class="navbar-link login">Accueil admin</a>-->
-                    <?php  
+                        <!--<a class="navbar-link login">Accueil admin</a>-->
+                        <?php  
                     }
 
                     ?>
-                    <a class="btn btn-default action-button" role="button" href="article.php">Accueil invité</a></p>
-                </p>
-            </div>
-        </nav>
-</div>
-</header>
+                        <a class="btn btn-default action-button" role="button" href="article.php">Accueil invité</a>
+                    </p>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </header>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 
 
@@ -124,6 +123,8 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "miniblogpt2";
+
+
 
 // Connexion au serveur MySQL
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -181,4 +182,3 @@ if ($conn->query($delete) === true) { // Exécution code MySql
 
 
 ?>
-
