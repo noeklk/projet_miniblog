@@ -180,8 +180,15 @@
   box-shadow: none;
   border: none;
   text-shadow: none;
-  padding: 10px 22px;
+  padding: 10px 22px 10px 22px;
   transition: background-color 0.25s;
+}
+
+.navigation-clean-button .action-button.retbar,
+.navigation-clean-button .action-button.retbar:active {
+
+  padding: 10px 22px 10px 35px;
+
 }
 
 .navigation-clean-button .action-button:hover {
@@ -258,7 +265,7 @@ button {
 }
 
 input[type=submit],
-button {
+button.centwidth {
   width: 100%;
 }
 
@@ -325,6 +332,26 @@ pre {
   line-height: 18.5714px;
 }
 
+.symbolfa4 {
+  font-size: 15px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: -0.35rem;
+  left: 60.5rem;
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  pointer-events: none;
+  color: #666666;
+
+}
 
 /*.class {
   font-family: Open Sans;

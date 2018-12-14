@@ -263,7 +263,7 @@ if ($ID_ART > 0) {
                                                     <input name="id" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
                                                     <!--<input name="affichePlus"  type="submit" value="Lire Plus">-->
                                                     <button type="submit" name="affichePlus">
-                                                        <img src="readmore.png" style="max-width: 100px;height: auto;>" />
+                                                        <img src="assets/img/readmore.png" style="max-width: 100px;height: auto;>" />
                                                     </button>
 
                                                 </form>
