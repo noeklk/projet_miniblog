@@ -6,50 +6,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<link rel="icon" type="image/png" href="assets/img/icons/favicon.ico" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/util.css?<?php echo time(); ?>">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css?<?php echo time(); ?>">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" href="assets/css/Basic-Header.css">
-	<style>
-
-		.wrap-login100 {
-  width: 900px;
-  background: #fff;
-  border-radius: 30px;
-  overflow: hidden;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 105px 130px 33px 95px;
-  margin-top: -125px;
-  
-}
-
-body{
-
-	overflow:hidden;
-}
-
-
-
-</style>
 
 </head>
 
@@ -57,14 +29,14 @@ body{
 
 	<header>
 		<div>
-			<nav class="navbar navbar-default navigation-clean-button">
+			<nav class="navbar navbar-default navigation-clean-button padbot">
 				<div class="container">
 					<div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé - Login</a>
 
 					</div>
 
 					<p class="navbar-text navbar-right actions">
-						<a class="btn btn-default action-button" role="button" href="article.php">Accueil</a></p>
+						<a class="btn btn-default action-button" role="button" href="index.php">Accueil</a></p>
 
 				</div>
 			</nav>
@@ -75,10 +47,10 @@ body{
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
+					<img src="assets/img/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" action="acceslogin.php" method="post">
+				<form class="login100-form validate-form" action="index.php?logtry=1" method="post">
 					<span class="login100-form-title">
 						Membre
 					</span>
@@ -100,7 +72,7 @@ body{
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="submit" name="btnSubmit">
+						<button class="login100-form-btn" type="submit" name="loginSubmit">
 							Login
 						</button>
 					</div>
@@ -137,21 +109,21 @@ body{
 
 
 	<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="assets/vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script src="assets/vendor/tilt/tilt.jquery.min.js"></script>
 	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="assets/js/main.js"></script>
 
 
 

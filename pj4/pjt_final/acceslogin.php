@@ -15,36 +15,6 @@
     <link rel="stylesheet" href="assets/css/Basic-Header.css">
     <!-- Bootstrap CSS -->
 
-
-
-    <style>
-
-
-
-
-        .php {
-    
-    
-    display: inline-block;
-}
-
- button{
-
-
-border: none;
-background: none;
-}
-
-h1{
-font-family: 'Open Sans', sans-serif;
-font-size: 50px;
-}
-
-
-
-
-</style>
-
 </head>
 
 <body>
@@ -66,19 +36,12 @@ font-size: 50px;
                     </div>
 
                     <p class="navbar-text navbar-right actions">
-                        <a class="btn btn-default action-button" role="button" href="article.php">Accueil</a></p>
+                        <a class="btn btn-default action-button" role="button" href="index.php">Accueil</a></p>
 
                 </div>
             </nav>
         </div>
     </header>
-
-    <script type="text/javascript">
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
-
 
     <?php
 
@@ -93,36 +56,20 @@ $MDPVRAI = "root";
 
 
     if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
-        
-        date_default_timezone_set('UTC');
-
-        $today = date("d-m-Y");  
-
-        $identifiant = "0";  
-        
+  
+        $identifiant = "0";
+          
         $auteu = isset($_POST['auteur']) ? $_POST['auteur'] : null;
         $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
         $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
-        $ID_ROW = isset($_POST['idrow']) ? $_POST['idrow'] : null;
-    
+        $ID_COL = isset($_POST['idrow']) ? $_POST['idrow'] : null;
+          
         ///////////////////////////////////////
-        
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "miniblogpt2";
-        $delete = "DELETE from blog2 where id= $ID_ROW";
-        
-        // Connexion au serveur MySQL
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
         
         $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
         $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
-        
+        $delete = "DELETE from blog2 where id= $ID_COL";
+
         if (isset($_POST['suppr'])) { 
         
             if ($conn->query($delete) === true) { // Exécution code MySql
@@ -156,12 +103,11 @@ $MDPVRAI = "root";
                 ?>
             <div class="col-sm">
 
-                <textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40" rows="2" class="box; rounded"><?php echo $row['titre'] . "\n" . $row['auteur'] . ", " . $row['date'];?></textarea>
+                <textarea readonly="readonly" cols="40" rows="2" class="box rounded hidden"><?php echo $row['titre'] . "\n" . $row['auteur'] . ", " . $row['date'];?></textarea>
 
                 <br>
 
-                <textarea style="resize: vertical; border:solid 1.5px black" readonly="readonly" cols="40" rows="3"
-                    class="box; rounded"><?php echo $row['texte']; ?></textarea>
+                <textarea readonly="readonly" cols="40" rows="3" class="box rounded"><?php echo $row['texte']; ?></textarea>
 
 
 

@@ -1,0 +1,314 @@
+#DEBUT_CASE_GET
+
+/*
+
+if(!empty($_GET)){
+switch ($_GET) {
+
+#DEBUT_commentaire
+case isset($_GET['id']):
+case isset($_GET['readmoreid']):
+
+#DEBUT_Entete_Comm    
+$retbar = "0";
+$affichart = "SELECT id, auteur, titre, texte, `date` FROM blog2 WHERE id = '$ID_ART'";
+$affichcomm = "SELECT id, pseudo, texte, `date`, id_article FROM commentaire WHERE id_article = '$ID_ART' ORDER BY `id` DESC";
+$pseud = isset($_POST['nom']) ? $_POST['nom'] : NULL;
+$mail = isset($_POST['mail']) ? $_POST['mail'] : NULL;
+$text = isset($_POST['comments']) ? $_POST['comments'] : NULL;
+$retbar = isset($_POST['idretbar']) ? $_POST['idretbar'] : NULL;
+$insert_comm = "INSERT INTO commentaire (pseudo, email, texte, `date`, id_article) VALUES ('$pseud', '$mail', '$_comment', '$today','$ID_ART')";
+$_comment = mysqli_real_escape_string($conn,$text);
+
+if(empty($ID_ROW)){
+
+    ?>
+
+                        <header>
+                            <div>
+                                <nav class="navbar navbar-default navigation-clean-button">
+                                    <div class="container">
+                                        <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé -
+                                                Commentaire</a>
+
+                                        </div>
+
+                                        <p class="navbar-text navbar-right actions">
+                                            <a class="btn btn-default action-button" role="button" href="?accueil">Accueil</a>
+                                        </p>
+
+                                    </div>
+                                </nav>
+                            </div>
+                        </header>
+
+
+                        <?php
+
+}
+else{
+
+    ?>
+
+                        <header>
+                            <div>
+                                <nav class="navbar navbar-default navigation-clean-button">
+                                    <div class="container">
+                                        <div class="navbar-header"><a class="navbar-brand" href="">Projet n°4 Noé -
+                                                Commentaire</a>
+
+                                        </div>
+
+                                        <p class="navbar-text navbar-right actions">
+                                            <span class="symbolfa4">
+                                                <i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+                                            </span>
+                                            <a class="btn btn-default action-button retbar" role="button" href="?id=<?php echo htmlspecialchars($retbar); ?>">Retour
+                                                à l'article</a>
+                                            <a class="btn btn-default action-button" role="button" href="?accueil">Accueil</a>
+                                        </p>
+
+                                    </div>
+                                </nav>
+                            </div>
+                        </header>
+
+
+                        <?php
+}
+
+
+
+    #DEBUT_commentaire
+#DEBUT_Insertion_du_comm_et_verif
+if ($ID_ART > 0){
+
+    $verif = 0;
+    
+    if (isset($_POST['SubmitComm']))//Ajouter un commentaire
+
+    {  
+        if ($conn->query($insert_comm) == true ) { // Exécution code MySql
+                    
+            
+            $verif = "1";
+            
+        } else {
+            
+            echo "<br>Error: " . $insert_comm . "<br>" . $conn->error;
+        }
+    
+    }
+#FIN_Insertion_du_comm_et_verif    
+
+#DEBUT_afficher_article
+    $result = $conn->query($affichart);
+    if ($result->num_rows > 0) { 
+    ?>
+                        <div class='container' align="center">
+
+                            <p> </p>
+                            <?php 
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {  
+        
+        ?>
+                            <textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="50" rows="2"
+                                class="box; rounded"><?php echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] ?> </textarea>
+
+                            <br />
+
+                            <textarea style="resize: none; border:solid 1.5px black" readonly="readonly" cols="50" rows="3"
+                                class="box; rounded"><?php echo $row["texte"]; ?></textarea>
+
+                            <br />
+                            <p></p>
+                            <?php
+    
+    }
+    } else {
+    ?>
+                            <p>0 resultats trouvés</p>
+
+                            <?php
+    }
+#FIN_afficher_article
+#DEBUT_Affichage_commentaire
+$result = $conn->query($affichcomm);
+if ($result->num_rows > 0) {//Afficher les commentaires
+
+    ?>
+                            <p> </p>
+                            <div class="container" style="width:50%;">
+                                <div class="row">
+                                    <u>
+                                        <p>
+                                            <?php
+       print htmlspecialchars($result->num_rows);
+       if ($result->num_rows > 1){echo ' commentaires';}else{echo ' commentaire';} 
+       ?>
+                                        </p>
+                                    </u>
+                                    <table class="table table-bordered">
+                                        <tbody>
+
+                                            <?php
+
+        while ($row = $result->fetch_assoc()) {
+
+            $retbar = $row["id_article"];
+            $identifiant = $row["id"];
+            $limitedtext = $row["texte"];
+            if (strlen($limitedtext) > $charlimit) {
+                $limitedtext = substr($limitedtext, 0, $charlimit) . "...";
+            }
+            ?>
+                                            <tr>
+                                                <td style="white-space: nowrap;">
+                                                    <?php print htmlspecialchars($row["pseudo"]); ?> <br>
+                                                    <?php print htmlspecialchars($row["date"]); ?>
+                                                </td>
+
+
+                                                <td style="word-break:break-all;">
+                                                    <?php print htmlspecialchars($limitedtext);
+
+        if (strlen($row["texte"]) > $charlimit) {
+                                            ?>
+                                                    <form action="?readmoreid=<?php echo htmlspecialchars($identifiant);?>"
+                                                        method="post">
+                                                        <input name="idretbar" type="hidden" value="<?php echo htmlspecialchars($retbar); ?>">
+
+                                                        <button type="submit" name="affichePlus">
+                                                            <img src="assets/img/readmore.png" style="max-width: 100px;height: auto;>" />
+                                                        </button>
+
+                                                    </form>
+                                                    <?php
+}
+?>
+                                                </td>
+                                            </tr>
+                                            <?php
+    }
+} else {
+?>
+                                            <p>0 commentaires trouvés</p>
+                                            <?php
+}
+?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <?php 
+#FIN_Affichage_commentaire
+#DEBUT_Formulaire_commentaire
+if ($verif == "1") { ?>
+                            <p class="text-center">Merci pour votre commentaire</p>
+                            <?php } 
+?>
+                            <br />
+
+
+                            <h4 align="center">Ajouter un commentaire</h4>
+
+
+                            <br />
+
+                            <div class="form-group; container" style="width:50%;">
+
+                                <form align="center" action="?id=<?php echo htmlspecialchars($ID_ART);?>" method="post">
+
+
+                                    <div class="form-group row">
+                                        <label for="example-text-input" class="col-sm-2 col-form-label">Nom</label>
+                                        <div class="col-sm-10">
+                                            <input name="nom" type="text" class="form-control" id="example-text-input"
+                                                placeholder="Nom" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="example-email-input" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input name="mail" type="email" class="form-control" id="example-email-input"
+                                                placeholder="xyz@zyz.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleTextarea">Commentaire</label>
+                                        <textarea name="comments" class="form-control" id="exampleTextarea" rows="3"
+                                            required></textarea>
+                                    </div>
+
+                                    <input class="btn btn-primary" type="submit" value="Envoyer" name="SubmitComm">
+                                </form>
+                                <p></p>
+
+                            </div>
+
+                            <?php
+        #FIN_Formulaire_commentaire
+
+#FIN_Commentaire
+
+        #DEBUT_Afficher_plus 
+}elseif($ID_ROW > 0){
+
+$affichbtnretour = "SELECT id_article FROM commentaire WHERE id = '$ID_ART'";
+$affichmore = "SELECT pseudo, texte, `date` FROM commentaire WHERE id = '$ID_ROW'";   
+$result = $conn->query($affichmore);
+
+if ($result->num_rows > 0) {
+
+    echo '<p></p>';
+// output data of each row
+    ?>
+
+                            <div class="container">
+                                <div class="row">
+
+                                    <table class="table table-bordered">
+                                        <tbody>
+
+                                            <?php
+
+    while ($row = $result->fetch_assoc()) {
+
+        ?>
+                                            <tr>
+                                                <td style="white-space: nowrap;">
+                                                    <?php print htmlspecialchars($row["pseudo"]); ?> <br>
+                                                    <?php print htmlspecialchars($row["date"]); ?>
+                                                </td>
+
+                                                <td style="word-break:break-all;">
+                                                    <?php print htmlspecialchars($row["texte"]);
+
+                                    ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+        }
+    }
+}
+else{
+    ?>
+                                            <p>bug _get</p>
+                                            <?php
+break;
+}
+break;  
+
+#FIN_Afficher_plus
+
+
+        default:
+        break;
+    }
+
+}
+*/#FIN_CASE_GET
