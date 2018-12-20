@@ -95,7 +95,7 @@ $limite = 5;
 /* On calcule donc le numéro du premier enregistrement */
 $debut = ($page - 1) * $limite;
 /* On ajoute le marqueur pour spécifier le premier enregistrement */
-$query = 'SELECT * FROM `article` LIMIT :limite OFFSET :debut';
+$query = 'SELECT * FROM `article` ORDER BY `id` DESC LIMIT :limite OFFSET :debut ';
 $query = $cnx->prepare($query);
 $query->bindValue('limite', $limite, PDO::PARAM_INT);
 /* On lie aussi la valeur */
@@ -233,7 +233,7 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
             
             
             ?>
-        <textarea readonly="readonly" cols="28" rows="2" class="box rounded hidden float-left mb-2"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " , $row["date"]; ?> </textarea>
+        <textarea readonly="readonly" cols="31" rows="2" class="box rounded hidden float-left mb-2"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " , $row["date"]; ?> </textarea>
 
         <br />
 
@@ -859,7 +859,7 @@ if (isset($_POST['RecepDataMain'])){
     if ($result1->num_rows > 0) {
         while ($row = $result1->fetch_assoc()) {
         
-            $accesid = $row['max_id'];
+            $accesid = $row['max_id']+1;
             
         }
   }
@@ -908,11 +908,13 @@ echo "<br>Error: " . $sql . "<br>" . $conn->error;
 
         ?>
 
-                        <div class="container listage" align="left">
+                        <div class="container listage" align="left" id="ancre">
                             <p align="center">
-                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1">Page précédente</a>
+                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1#ancre">Page précédente</a>
                                 —
-                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1">Page suivante</a>
+                                <?php echo $page ?> —
+
+                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1#ancre">Page suivante</a>
                             </p>
                             <div class="row">
 
@@ -932,7 +934,7 @@ echo "<br>Error: " . $sql . "<br>" . $conn->error;
             ?>
                                 <div class="col-12">
                                     <div class="petitesboites">
-                                        <textarea readonly="readonly" cols="28" rows="2" class="box rounded hidden float-left mb-1"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " . $row["date"]; 
+                                        <textarea readonly="readonly" cols="31" rows="2" class="box rounded hidden float-left mb-1"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " . $row["date"]; 
 
             ?>
              
@@ -940,7 +942,7 @@ echo "<br>Error: " . $sql . "<br>" . $conn->error;
 
 
 
-                                        <textarea readonly="readonly" cols="41" rows="4" class="box rounded hidden float-left mb-2"><?php  echo $limitedtext; ?></textarea>
+                                        <textarea readonly="readonly" cols="46" rows="4" class="box rounded hidden float-left mb-2"><?php  echo $limitedtext; ?></textarea>
 
 
                                         <br />
@@ -968,9 +970,10 @@ echo "<br>Error: " . $sql . "<br>" . $conn->error;
 ?>
                             </div>
                             <p align="center">
-                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1">Page précédente</a>
+                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1#ancre">Page précédente</a>
                                 —
-                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1">Page suivante</a>
+                                <?php echo $page ?> —
+                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1#ancre">Page suivante</a>
                             </p>
                         </div>
                         <?php
@@ -983,35 +986,43 @@ $conn->close();
 ?>
 
                         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                            crossorigin="anonymous"></script>
+                            crossorigin="anonymous">
+                        </script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
                             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                            crossorigin="anonymous"></script>
+                            crossorigin="anonymous">
+                        </script>
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                            crossorigin="anonymous"></script>
-                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            crossorigin="anonymous">
+                        </script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+                        </script>
 
                         <script>
                             //Generation d'identifiants et data-target uniques pour chaque modal
-                            $('.mdlspr').each(function (i) {
+                            $('.mdlspr').each(function(i) {
                                 var newID = $(this).attr('id') + i;
                                 $(this).attr('id', newID);
                             });
 
-                            $('.btnspr').each(function (i) {
+                            $('.btnspr').each(function(i) {
                                 var newTAR = $(this).attr('data-target') + i;
                                 $(this).attr('data-target', newTAR);
                             });
 
-                            $('.mdlmdf').each(function (i) {
+                            $('.mdlmdf').each(function(i) {
                                 var newID = $(this).attr('id') + i;
                                 $(this).attr('id', newID);
                             });
 
-                            $('.btnmdf').each(function (i) {
+                            $('.btnmdf').each(function(i) {
                                 var newTAR = $(this).attr('data-target') + i;
                                 $(this).attr('data-target', newTAR);
                             });
+
+                            /* $('html, body').animate({
+                                 scrollTop: $("#ancre").offset().top
+                             }, 50);*/
                         </script>
 
 </body>
