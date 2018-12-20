@@ -2,7 +2,7 @@
 $cnx = new PDO('mysql:host=localhost;dbname=miniblogpt2;charset=utf8', 'root', '');
 
 $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
-$limite = 3;
+$limite = 5;
 
 // Partie "Requête"
 /* On calcule donc le numéro du premier enregistrement */
@@ -29,6 +29,6 @@ while ($element = $query->fetch()) {
 /* Notez que les liens ainsi mis vont bien faire rester sur le même script en passant
  * le numéro de page en paramètre */
 ?>
-<a href="?page=<?php echo $page - 1; ?>">Page précédente</a>
+<a href="?page=<?php echo $page - 1; ?>&page=1">Page précédente</a>
 —
-<a href="?page=<?php echo $page + 1; ?>">Page suivante</a>
+<a href="?page=<?php echo $page + 1; ?>&page=1">Page suivante</a>

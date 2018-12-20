@@ -11,7 +11,7 @@
 
 .navigation-clean-button.padbot {
 
-  padding-bottom: 8px;
+  padding-bottom: 8.1px;
 
 }
 
@@ -28,10 +28,10 @@
 }
 
 .navigation-clean-button .navbar-brand img {
-  height: 100%;
-  display: inline-block;
-  margin-right: 10px;
-  width: auto;
+  height: 100% !important;
+  display: inline-block !important;
+  margin-right: 10px !important;
+  width: auto !important;
 }
 
 .navigation-clean-button .navbar-toggle {
@@ -160,12 +160,12 @@
 }
 
 .navigation-clean-button .actions {
-  margin-top: 7px;
+  margin-top: 7px !important;
   margin-bottom: 0;
 }
 
 .navigation-clean-button .actions .login {
-  margin-right: 7px;
+  margin-right: 7px !important;
   text-decoration: none;
   color: #fff;
 }
@@ -175,74 +175,74 @@
 }
 
 .navigation-clean-button.navbar-inverse .actions .login:hover {
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, .5) !important;
 }
 
 .navigation-clean-button .action-button,
 .navigation-clean-button .action-button:active {
-  background: #56c6c6;
-  border-radius: 20px;
-  color: #fff;
-  box-shadow: none;
-  border: none;
-  text-shadow: none;
-  padding: 10px 22px 10px 22px;
-  transition: background-color 0.25s;
+  background: #56c6c6 !important;
+  border-radius: 20px !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  border: none !important;
+  text-shadow: none !important;
+  padding: 10px 22px 10px 22px !important;
+  transition: background-color 0.25s !important;
 }
 
 .navigation-clean-button .action-button.retbar,
 .navigation-clean-button .action-button.retbar:active {
 
-  padding: 10px 22px 10px 35px;
+  padding: 10px 22px 10px 35px !important;
 
 }
 
 .navigation-clean-button .action-button:hover {
-  background: #66d7d7;
+  background: #66d7d7 !important;
 }
 
 .navigation-clean-button.navbar-inverse .action-button,
 .navigation-clean-button.navbar-inverse .action-button:active {
-  background: #208f8f;
+  background: #208f8f !important;
 }
 
 .navigation-clean-button.navbar-inverse .action-button:hover {
-  background: #269d9d;
+  background: #269d9d !important;
 }
 
 
 @media (max-width:767px) {
   .navigation-clean-button .navbar-nav .open .dropdown-menu {
-    box-shadow: none;
+    box-shadow: none !important;
   }
 }
 
 @media (max-width:767px) {
   .navigation-clean-button .navbar-nav .open .dropdown-menu>li>a {
-    color: #37434d;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    line-height: 1;
+    color: #37434d !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    line-height: 1 !important;
   }
 }
 
 @media (max-width:767px) {
   .navigation-clean-button {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 
 @media (max-width:767px) {
   .navigation-clean-button .navbar-header {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
   }
 }
 
 @media (max-width:767px) {
   .navigation-clean-button .navbar-right {
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
   }
 }
 
@@ -264,7 +264,7 @@ button {
 .boite {
   border-radius: 10px;
   background-color: #f2f2f2;
-  padding: 50px;
+  padding: 50px 0 75px 0;
   margin-top: 25px;
   width: 650px;
   height: auto;
@@ -273,16 +273,25 @@ button {
 input.centwidth[type=submit],
 button.centwidth {
   width: 100%;
+
+}
+
+input.quarwidth[type=submit],
+button.quarwidth {
+  width: 40%;
+
 }
 
 .listage {
   border-radius: 10px;
   background-color: #f2f2f2;
   padding: 25px;
+  width: 400px;
 }
 
 .petitesboites {
-  width: 234px;
+  /*width: 234px;*/
+  width: 346px;
 }
 
 * {
@@ -296,6 +305,17 @@ button.centwidth {
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+.boitleft {
+  float: left;
+
+}
+
+.rel {
+
+  position: relative;
+  width: 40rem;
 }
 
 .navright {
@@ -359,6 +379,26 @@ textarea.hidden {
 
 }
 
+.symbolfa3 {
+  font-size: 15px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: -0.282rem;
+  left: -1.6rem;
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  pointer-events: none;
+  color: #666666;
+}
+
 .retbarwrap:hover+span.symbolfa4 {
   color: #57b846;
 
@@ -367,7 +407,3 @@ textarea.hidden {
 .php {
   display: inline-block;
 }
-
-/*.class {
-  font-family: Open Sans;
-}*/

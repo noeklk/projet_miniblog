@@ -23,6 +23,7 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" href="assets/css/Basic-Header.css">
 
+	<?php $conf = isset($_GET['verif']) ? $_GET['verif'] : null; ?>
 </head>
 
 <body>
@@ -79,30 +80,20 @@
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Forgot
-						</span>
-						<a class="txt2" href="#">
-							Username / Password?
-						</a>
-						<?php
 
-						$conf = isset($_GET['verif']) ? $_GET['verif'] : null;
-
+							<?php
 						if ($conf == true)
 						{
-							echo '<p class="text-center"> ID ou MDP erroné </p>';
+							?>
+							<p class="txt1"> ID ou MDP erroné </p>
+							<?php
 						}
-
 						?>
+						</span>
 					</div>
-
-
 				</form>
-
 			</div>
-
 		</div>
-
 	</div>
 
 

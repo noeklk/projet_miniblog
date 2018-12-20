@@ -178,7 +178,7 @@ if ($result->num_rows > 0) {
  
 // output data of each row
     while ($row = $result->fetch_assoc()) {
-        $editdate = "edit : $today ";
+        $editdate = "edité le : $today";
         ?>
 <form action="editiondone.php" method="post" style="text-align: center;">
     <div class="container form-group">

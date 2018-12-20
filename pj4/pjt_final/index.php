@@ -5,7 +5,7 @@
 
 
     <title>Mini Blog Final</title>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8_general_ci" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--===============================================LOGIN.PHP================================================-->
 
@@ -49,7 +49,7 @@ $today = date("d-m-Y");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "miniblogpt2";
+$dbname = "blog";
 
 $conn = new mysqli($servername, $username, $password, $dbname) or die($conn);
 // Connexion au serveur MySQL
@@ -66,10 +66,11 @@ $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
 $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
 $_comment = mysqli_real_escape_string($conn,$comment);
 /*===============================================================================================*/
+$infos = isset($_GET['infos']) ? $_GET['infos'] : "0";
 $ID_RDMORE = isset($_GET['readmoreid']) ? $_GET['readmoreid'] : null;
 $ID_ART = isset($_GET['id']) ? $_GET['id'] : null;
 /*===============================================================================================*/
-$page = (!empty($_GET['accueil']) ? $_GET['accueil'] : 1);
+$accueil = (!empty($_GET['accueil']) ? $_GET['accueil'] : 1);
 /*===============================================================================================*/
 $admin = isset($_GET['logtry']) ? $_GET['logtry'] : 0;
 $IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
@@ -83,16 +84,28 @@ $charlimit = 50;
 /*===============================================================================================*/
 
 /*===============================================================================================*/
-$sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$_comment', '$today')";
-$affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
+$sql = "INSERT INTO article (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$_comment', '$today')";
+$affich = "SELECT id, auteur, titre, texte, `date` FROM article ORDER BY `id` DESC";
 $result = $conn->query($affich);
 /*===============================================================================================*/
-
+$cnx = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
+$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+$limite = 5;
+// Partie "Requête"
+/* On calcule donc le numéro du premier enregistrement */
+$debut = ($page - 1) * $limite;
+/* On ajoute le marqueur pour spécifier le premier enregistrement */
+$query = 'SELECT * FROM `article` LIMIT :limite OFFSET :debut';
+$query = $cnx->prepare($query);
+$query->bindValue('limite', $limite, PDO::PARAM_INT);
+/* On lie aussi la valeur */
+$query->bindValue('debut', $debut, PDO::PARAM_INT);
+$query->execute();
 /*===============================================================================================*/
 if ($ID_RDMORE > 0 || $ID_ART > 0 ){
 
     $retbar = "0";
-    $affichart = "SELECT id, auteur, titre, texte, `date` FROM blog2 WHERE id = '$ID_ART'";
+    $affichart = "SELECT id, auteur, titre, texte, `date` FROM article WHERE id = '$ID_ART'";
     $affichcomm = "SELECT id, pseudo, texte, `date`, id_article FROM commentaire WHERE id_article = '$ID_ART' ORDER BY `id` DESC";
     $pseud = isset($_POST['nom']) ? $_POST['nom'] : NULL;
     $mail = isset($_POST['mail']) ? $_POST['mail'] : NULL;
@@ -210,21 +223,24 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
         $result = $conn->query($affichart);
         if ($result->num_rows > 0) { 
         ?>
-    <div class='container' align="center">
+    <div class='container rel' align="center">
 
         <p> </p>
         <?php 
         // output data of each row
-        while ($row = $result->fetch_assoc()) {  
+        while ($row = $result->fetch_assoc()) { 
+            
+            
             
             ?>
-        <textarea readonly="readonly" cols="50" rows="2" class="box rounded hidden"><?php echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"] ?> </textarea>
+        <textarea readonly="readonly" cols="28" rows="2" class="box rounded hidden float-left mb-2"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " , $row["date"]; ?> </textarea>
 
         <br />
 
-        <textarea readonly="readonly" cols="50" rows="3" class="box rounded"><?php echo $row["texte"]; ?></textarea>
+        <textarea readonly="readonly" cols="74" rows="5" class="box rounded float-left"><?php echo $row['texte']; ?></textarea>
 
-        <br />
+        <br /><br /><br /><br /><br /><br /><br />
+
         <p></p>
         <?php
         
@@ -242,17 +258,17 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
     
         ?>
         <p> </p>
-        <div class="container" style="width:50%;">
+        <div class="container" style="width:100%;">
             <div class="row">
                 <u>
                     <p>
                         <?php
-           print htmlspecialchars($result->num_rows);
-           if ($result->num_rows > 1){echo ' commentaires';}else{echo ' commentaire';} 
-           ?>
+                            print htmlspecialchars($result->num_rows);
+                            if ($result->num_rows > 1){echo ' commentaires';}else{echo ' commentaire';} 
+                 ?>
                     </p>
                 </u>
-                <table class="table table-bordered">
+                <table class="table table-bordered float-center">
                     <tbody>
 
                         <?php
@@ -268,9 +284,11 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
                 ?>
                         <tr>
                             <td style="white-space: nowrap;">
-                                <h5>
-                                    <?php print htmlspecialchars($row["pseudo"]); ?>
-                                </h5>
+                                <p class="fs-16">
+                                    <b>
+                                        <?php print htmlspecialchars($row["pseudo"]); ?>
+                                    </b>
+                                </p>
                                 <p></p>
                                 <p>
                                     <?php print htmlspecialchars($row["date"]); ?>
@@ -280,21 +298,14 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
 
 
                             <td style="word-break:break-all;">
-                                <p style="">
+                                <p>
                                     <?php print htmlspecialchars($limitedtext);
     
             if (strlen($row["texte"]) > $charlimit) {
                                                 ?>
-
+                                    <br>
                                     <a href="?readmoreid=<?php echo htmlspecialchars($identifiant);?>">Lire Plus</a>
-                                    <!-- <form action="?readmoreid=php echo htmlspecialchars($identifiant);?>" method="post">
-                                        <input name="idretbar" type="hidden" value="php echo htmlspecialchars($retbar); ?>">
 
-                                        <button style="cursor: pointer;" type="submit" name="affichePlus">
-                                            <img src="assets/img/readmore.png" style="max-width: 100px;height: 25px;>" />
-                                        </button>
-
-                                    </form>-->
                                     <?php                       
     }
     ?>
@@ -332,7 +343,7 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
 
         <br />
 
-        <div class="form-group; container" style="width:50%;">
+        <div class="form-group; container" style="width:625px;">
 
             <form align="center" action="?id=<?php echo htmlspecialchars($ID_ART);?>" method="post">
 
@@ -424,8 +435,30 @@ if ($ID_RDMORE > 0 || $ID_ART > 0 ){
     }
 #DEBUT_LOGIN##############################################################################
 elseif($admin == 1){
+                                   
+    $IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
+    $IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
+    $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
+    //$conf = true; // A ENLEVER APRES TESTS
 
-    ?>
+    $login = "SELECT `login`, mdp FROM identifiants WHERE autorisation='1'";
+
+    $result = $conn->query($login);  
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+        
+            $IDVRAI = $row['login'];
+            $MDPVRAI = $row['mdp'];
+        }
+  }
+
+    
+    
+        if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
+
+?>
+
 
                         <header>
                             <div>
@@ -435,9 +468,27 @@ elseif($admin == 1){
                                                 Backend</a>
 
                                         </div>
+                                        <div class="wrap-retour">
+                                            <div class="navleft">
+                                                <form action="#" method="post">
+                                                    <input type="hidden" name="verif_admin" value="true">
+                                                    <p class="navbar-text navbar-right actions retbarwrap">
+                                                        <button class="btn btn-default action-button retbar" role="button"
+                                                            type="submit">Rafraichir la page</button>
+                                                    </p>
+                                                </form>
+                                                <span class="symbolfa3">
+                                                    <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+                                                </span>
 
-                                        <p class="navbar-text navbar-right actions">
-                                            <a class="btn btn-default action-button" role="button" href="index.php">Accueil</a></p>
+                                            </div>
+
+                                            <div class="navright">
+                                                <p class="navbar-text navbar-right actions">
+                                                    <a class="btn btn-default action-button" role="button" href="?accueil">Accueil</a>
+                                                </p>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </nav>
@@ -446,21 +497,11 @@ elseif($admin == 1){
 
 
 
+
+
                         <?php
 
-    
 
-    $IDLOGIN = isset($_POST['LOGIN_ID']) ? $_POST['LOGIN_ID'] : null;
-    $IDMDP = isset($_POST['LOGIN_MDP']) ? $_POST['LOGIN_MDP'] : null;
-    $conf = isset($_POST['verif_admin']) ? $_POST['verif_admin'] : null;
-    //$conf = true; // A ENLEVER APRES TESTS
-    $IDVRAI = "root";
-    $MDPVRAI = "root";
-    
-    
-    
-    
-        if ($IDLOGIN == $IDVRAI && $IDMDP == $MDPVRAI || $conf == true ) {
       
             $identifiant = "0";
               
@@ -468,18 +509,27 @@ elseif($admin == 1){
             $titr = isset($_POST['titre']) ? $_POST['titre'] : null;
             $comment = isset($_POST['comments']) ? $_POST['comments'] : null;
             $ID_COL = isset($_POST['idrow']) ? $_POST['idrow'] : null;
-              
-            ///////////////////////////////////////
-            
-            $sql = "INSERT INTO blog2 (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
-            $affich = "SELECT id, auteur, titre, texte, `date` FROM blog2 ORDER BY `id` DESC";
-            $delete = "DELETE from blog2 where id= $ID_COL";
 
+            $ID_MODF = isset($_POST['idmodf']) ? $_POST['idmodf'] : null;
+            $AUT_MODF = isset($_POST['autmodf']) ? $_POST['autmodf'] : null;
+            $TIT_MODF = isset($_POST['titmodf']) ? $_POST['titmodf'] : null;
+            $TXT_MODF = isset($_POST['comm_modf']) ? $_POST['comm_modf'] : null;
+            $DAT_MODF = isset($_POST['editdate']) ? $_POST['editdate'] : null;
+            $_DAT_MODF = mysqli_real_escape_string($conn,$DAT_MODF);
+            $_TXT_MODF = mysqli_real_escape_string($conn,$TXT_MODF);        
+            ///////////////////////////////////////
+
+            
+            
+            $sql = "INSERT INTO article (auteur, titre, texte, `date`) VALUES ('$auteu', '$titr', '$comment', '$today')";
+            $affich = "SELECT id, auteur, titre, texte, `date` FROM article ORDER BY `id` DESC";
+            $delete = "DELETE from article where id='$ID_COL'";
+            $edition = "UPDATE article SET auteur='$AUT_MODF', titre='$TIT_MODF', texte='$_TXT_MODF', `date`='$_DAT_MODF' where id ='$ID_MODF'";
 
 
             if (isset($_POST['suppr'])) { 
             
-                if ($conn->query($delete) === true) { // Exécution code MySql
+                if ($conn->query($delete) == true) { // Exécution code MySql
             
                     
                 } else {
@@ -487,6 +537,17 @@ elseif($admin == 1){
                     echo "<br>Error: " . $delete . "<br>" . $conn->error;
                 }
             
+            }elseif(isset($_POST['modif'])){
+                
+
+                if ($conn->query($edition) == true) { // Exécution code MySql
+            
+                   
+                } else {
+                
+                    echo "<br>Error: " . $edition . "<br>" . $conn->error;
+                }
+
             }
             
             $result = $conn->query($affich);
@@ -502,36 +563,37 @@ elseif($admin == 1){
                                 <?php
                     // output data of each row
                 while ($row = $result->fetch_assoc()) {
-            
+
+                    $editdate = "édité le : $today";
+                    
             
                     $identifiant = $row["id"];
                     
             
                     ?>
-                                <div class="col-sm">
+                                <div class="col-sm-4">
 
-                                    <textarea style="resize:none; border:solid 1.5px black;" readonly="readonly" cols="40"
-                                        rows="2" class="box; rounded"><?php echo $row['titre'] . "\n" . $row['auteur'] . ", " . $row['date'];?></textarea>
+                                    <textarea readonly="readonly" cols="40" rows="2" class="box rounded float-left mb-2"> <?php echo $row['titre'] . "\n " . $row['auteur'] . ", " . $row['date'];?></textarea>
 
                                     <br>
 
-                                    <textarea style="resize: vertical; border:solid 1.5px black" readonly="readonly"
-                                        cols="40" rows="3" class="box; rounded"><?php echo $row['texte']; ?></textarea>
+                                    <textarea readonly="readonly" cols="40" rows="3" class="box rounded float-left mb-3"><?php echo $row['texte']; ?></textarea>
 
 
 
                                     <p>
                                         <p>
 
-                                            <!-- BOUTON ACTIONNAGE MODAL -->
+                                            <!-- BOUTON ACTIONNAGE MODAL SUPPRESSION -->
                                             <p class="php">
-                                                <button type="button" value="supprimer" data-toggle="modal" data-target="#exampleModal">
+                                                <button class="btnspr" type="button" value="supprimer" data-toggle="modal"
+                                                    data-target="#supprModal">
                                                     <a class="btn btn-danger">
                                                         <i class="fa fa-trash-o fa-lg"></i> Delete</a></button>
                                             </p>
-                                            <!-- FIN BOUTON ACTIONNAGE MODAL -->
-                                            <!-- DEBUT MODAL -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            <!-- FIN BOUTON ACTIONNAGE MODAL SUPPRESSION -->
+                                            <!-- DEBUT MODAL SUPPRESSION -->
+                                            <div class="modal fade mdlspr" id='supprModal' tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -544,6 +606,8 @@ elseif($admin == 1){
                                                         </div>
                                                         <div class="modal-body">
                                                             Confirmez vous la suppression de l'article ?
+
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -558,15 +622,86 @@ elseif($admin == 1){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- FIN MODAL -->
+                                            <!-- FIN MODAL SUPPRESSION -->
 
-                                            <form action="edition.php" method="post" class="php">
 
-                                                <input type="hidden" name="verif_admin" value="true">
-                                                <input name="idrow" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
-                                                <button type="submit" value="editer"><a class="btn btn-primary">
-                                                        <i class="fa fa-pencil fa-lg"></i> Edit</a> </button>
-                                            </form>
+                                            <!-- BOUTON ACTIONNAGE MODAL MODIFICATION -->
+                                            <p class="php">
+                                                <button class="btnmdf" type="button" value="supprimer" data-toggle="modal"
+                                                    data-target="#modifModal">
+                                                    <a class="btn btn-primary">
+                                                        <i class="fa fa-pencil fa-lg"></i> Edit</a></button>
+                                            </p>
+                                            <!-- FIN BOUTON ACTIONNAGE MODAL MODIFICATION -->
+                                            <!-- DEBUT MODAL MODIFICATION-->
+                                            <div class="modal fade mdlmdf" id="modifModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form action="#" method="post">
+
+
+                                                                <div class="input-group mb-2 form-group">
+
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon1">Auteur</span>
+                                                                    </div>
+                                                                    <input type="text" name="autmodf" maxlength="15"
+                                                                        class="form-control" aria-label="Username"
+                                                                        aria-describedby="basic-addon1" value="<?php echo htmlspecialchars($row['auteur']); ?>"
+                                                                        required>
+                                                                </div>
+
+                                                                <div class="
+                                                                        input-group mb-5 form-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon2">Titre</span>
+                                                                    </div>
+                                                                    <input type="text" name="titmodf" maxlength="50"
+                                                                        class="form-control" aria-label="Username"
+                                                                        aria-describedby="basic-addon1" value="<?php echo htmlspecialchars($row['titre']); ?>"
+                                                                        required>
+                                                                </div>
+
+
+                                                                <div class="input-group form-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon3">Contenu</span>
+                                                                    </div>
+                                                                    <textarea type="text" class="form-control" name="comm_modf"
+                                                                        rows="4" aria-label="With textarea" required><?php echo htmlspecialchars($row['texte']); ?></textarea>
+                                                                </div>
+
+                                                                <input name="editdate" type="hidden" value="<?php echo htmlspecialchars($editdate); ?>">
+                                                                <input name="idmodf" type="hidden" value="<?php echo htmlspecialchars($identifiant); ?>">
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Annulez la modification</button>
+
+                                                            <input type="hidden" name="verif_admin" value="true">
+
+                                                            <button type="submit" class="btn btn-primary" name="modif">Modifier
+                                                                l'article</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- FIN MODAL MODIFICATION-->
+
+
                                         </p>
                                         <br />
                                         <br />
@@ -604,7 +739,7 @@ elseif($admin == 1){
 }
 #FIN_LOGIN################################################################################
 
-elseif($page == 1){
+elseif($accueil == 1){
     ?>
 
                         <header>
@@ -618,8 +753,9 @@ elseif($page == 1){
                                         </div>
 
                                         <p class="navbar-text navbar-right actions">
-                                            <a class="navbar-link login" href="login.php">Se connecter</a>
-                                            <a class="btn btn-default action-button" role="button" href="">S'inscrire</a></p>
+
+                                            <a class="btn btn-default action-button" role="button" href="login.php">Se
+                                                connecter</a></p>
 
                                     </div>
                                 </nav>
@@ -660,36 +796,39 @@ elseif($page == 1){
                                         <textarea type="text" class="form-control" name="comments" rows="4" aria-label="With textarea"
                                             required></textarea>
                                     </div>
+
+
                                     <br>
-                                    <input class="btn btn-success centwidth" type="submit" value="Submit" name="RecepDataMain">
+                                    <input class="btn btn-success quarwidth float-left" type="submit" value="Envoyer un article"
+                                        name="RecepDataMain">
 
                                 </form>
-                                <br />
+
 
 
                                 <?php
 #Debut_Afficher ou cacher les informations
 $boites = isset($_POST['boites']) ? $_POST['boites'] : null;
-if ($boites == "1"){
+
+if ($boites == "1" || $infos == "1"){
 
 ?>
 
                                 <form action="?infos=0" method="POST">
 
                                     <input type="hidden" name="boites" value="0">
-                                    <input class="btn btn-success centwidth" type="submit" value="Cacher informations"
+                                    <input class="btn btn-success quarwidth float-right" type="submit" value="Cacher les articles"
                                         name="aa">
 
                                 </form>
                                 <?php
 }
 else{
-
 ?>
                                 <form action="?infos=1" method="POST">
 
                                     <input type="hidden" name="boites" value="1">
-                                    <input class="btn btn-success centwidth" type="submit" value="Afficher informations"
+                                    <input class="btn btn-success quarwidth float-right" type="submit" value="Afficher les articles"
                                         name="Submit2">
 
                                 </form>
@@ -710,130 +849,134 @@ else{
 
 
 
-if (!empty($_POST)) {
+if (isset($_POST['RecepDataMain'])){
 
-    switch ($_POST) {
+    $maxid = "SELECT MAX(id) AS max_id FROM article";
 
-        case isset($_POST['loginSubmit']):
+    
+    $result1 = $conn->query($maxid);  
 
-        break;
-   
-        case isset($_POST['RecepDataMain']):
-        #DEBUT_AFFICHER_ENVOI
-        ?>
+    if ($result1->num_rows > 0) {
+        while ($row = $result1->fetch_assoc()) {
+        
+            $accesid = $row['max_id'];
+            
+        }
+  }
+?>
 
                         <div align="center">
 
 
-                            <article>
-                                <p>Bonjour, <strong>
-                                        <?php print htmlspecialchars($auteu); ?></strong> merci
-                                    pour
-                                    votre article
-                                    suivant
-                                    :
-                                    <strong>
-                                        <?php print htmlspecialchars($titr); ?></strong> qui a pour
-                                    contenu : </p>
-                            </article>
+
+                            <p class="articlesui">Bonjour, <strong>
+                                    <?php print htmlspecialchars($auteu); ?></strong> merci
+                                pour
+                                votre article
+                                suivant
+                                :
+                                <strong>
+                                    <?php print htmlspecialchars($titr); ?></strong></p>
+
 
                             <br>
-
+                            <a href="?id=<?php echo $accesid?>">Accéder à l'artice en ligne</a>
+                            <br>
+                            <br>
                             <textarea readonly="readonly" cols="40" rows="5" class="box"><?php echo $comment ?></textarea>
 
-                            <p>le
+
+                            <p class="articlesui">le
                                 <?php echo $today?>
                             </p>
 
                         </div>
 
                         <?php
-    
-    if ($conn->query($sql) == true) { // Exécution code MySql
-    
-        echo "<br><br>Vos informations ont été ajoutés avec succès";
-    } else {
-    
-        echo "<br>Error: " . $sql . "<br>" . $conn->error;
-    }
-        break;
-   #FIN_AFFICHER_ENVOI
-        case isset($_POST['Submit2']):
-        
 
-        if ($result->num_rows > 0) {
+if ($conn->query($sql) == true) { // Exécution code MySql
 
-            ?>
 
-                        <div class="container listage" align="center">
+} else {
+
+echo "<br>Error: " . $sql . "<br>" . $conn->error;
+}
+    
+}elseif(isset($_POST['Submit2']) || $infos == "1"){
+
+    if ($result->num_rows > 0) {
+
+        ?>
+
+                        <div class="container listage" align="left">
+                            <p align="center">
+                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1">Page précédente</a>
+                                —
+                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1">Page suivante</a>
+                            </p>
                             <div class="row">
 
                                 <?php 
-            
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-    
-                $limitedtext = $row["texte"];
-                $identifiant = $row["id"];
-                if (strlen($limitedtext) > $charlimit) {
-    
-                    $limitedtext = substr($limitedtext, 0, $charlimit) . "...";
-                  
-    
-                }
-               
-                
-               
-                ?>
-                                <div class="col-sm-4">
+        
+        // output data of each row
+        while ($row = $query->fetch()) {
+
+            $limitedtext = $row["texte"];
+            $identifiant = $row["id"];
+            if (strlen($limitedtext) > $charlimit) {
+
+                $limitedtext = substr($limitedtext, 0, $charlimit) . "...";
+
+            }
+             
+            ?>
+                                <div class="col-12">
                                     <div class="petitesboites">
-                                        <textarea readonly="readonly" cols="30" rows="2" class="box rounded hidden"><?php echo $row["titre"] . "\n" . $row["auteur"] . ", " . $row["date"]; 
-    
-                ?>
-                 
-                 </textarea>
+                                        <textarea readonly="readonly" cols="28" rows="2" class="box rounded hidden float-left mb-1"> <?php echo $row["titre"] . "\n " . $row["auteur"] . ", " . $row["date"]; 
 
-                                        <br />
+            ?>
+             
+             </textarea>
 
-                                        <textarea readonly="readonly" cols="30" rows="3" class="box rounded hidden"><?php  echo $limitedtext; ?></textarea>
+
+
+                                        <textarea readonly="readonly" cols="41" rows="4" class="box rounded hidden float-left mb-2"><?php  echo $limitedtext; ?></textarea>
 
 
                                         <br />
                                         <form action="?id=<?php echo htmlspecialchars($identifiant);?>" method="post">
                                             <p>
 
-                                                <button type="submit" class="btn btn-outline-primary centwidth">Accéder
+                                                <button type="submit" class="btn btn-outline-primary centwidth mb-3">Accéder
                                                     au
                                                     contenu</button>
 
                                             </p>
                                         </form>
 
-                                        <p></p>
+
                                     </div>
                                 </div>
+                                <hr style="width: 100%; height: 1px; box-shadow: 0 0 10px 1px black;" />
+                                <br><br>
 
                                 <?php
-    
-            }
-        } else {
-            print "0 resultats trouvés";
         }
-    ?>
-
+    } else {
+        print "0 resultats trouvés";
+    }
+?>
                             </div>
+                            <p align="center">
+                                <a href="?page=<?php echo $page - 1; ?>&accueil=1&infos=1">Page précédente</a>
+                                —
+                                <a href="?page=<?php echo $page + 1; ?>&accueil=1&infos=1">Page suivante</a>
+                            </p>
                         </div>
                         <?php
-    
-        break;
-   
-        
-   
-        default:
-        
-        break;
+
 }
-}
+
 
 $conn->close();
 
@@ -847,6 +990,29 @@ $conn->close();
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
                             crossorigin="anonymous"></script>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+                        <script>
+                            //Generation d'identifiants et data-target uniques pour chaque modal
+                            $('.mdlspr').each(function (i) {
+                                var newID = $(this).attr('id') + i;
+                                $(this).attr('id', newID);
+                            });
+
+                            $('.btnspr').each(function (i) {
+                                var newTAR = $(this).attr('data-target') + i;
+                                $(this).attr('data-target', newTAR);
+                            });
+
+                            $('.mdlmdf').each(function (i) {
+                                var newID = $(this).attr('id') + i;
+                                $(this).attr('id', newID);
+                            });
+
+                            $('.btnmdf').each(function (i) {
+                                var newTAR = $(this).attr('data-target') + i;
+                                $(this).attr('data-target', newTAR);
+                            });
+                        </script>
 
 </body>
 

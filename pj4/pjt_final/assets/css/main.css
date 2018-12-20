@@ -79,6 +79,25 @@ p {
   margin: 0px;
 }
 
+p.articlesui {
+
+
+  font-size: 20px;
+
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+}
+
+textarea {
+
+  font-family: Poppins-Regular !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: #666666 !important;
+
+}
+
 ul,
 li {
   margin: 0px;
@@ -183,7 +202,8 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.5;
-  color: #999999;
+  color: #D22B2B;
+
 }
 
 .txt2 {
