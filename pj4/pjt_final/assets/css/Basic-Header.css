@@ -407,3 +407,8 @@ textarea.hidden {
 .php {
   display: inline-block;
 }
+
+textarea {
+
+  width: 100%;
+}

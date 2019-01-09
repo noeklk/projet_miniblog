@@ -1000,22 +1000,22 @@ $conn->close();
 
                         <script>
                             //Generation d'identifiants et data-target uniques pour chaque modal
-                            $('.mdlspr').each(function(i) {
+                            $('.mdlspr').each(function (i) {
                                 var newID = $(this).attr('id') + i;
                                 $(this).attr('id', newID);
                             });
 
-                            $('.btnspr').each(function(i) {
+                            $('.btnspr').each(function (i) {
                                 var newTAR = $(this).attr('data-target') + i;
                                 $(this).attr('data-target', newTAR);
                             });
 
-                            $('.mdlmdf').each(function(i) {
+                            $('.mdlmdf').each(function (i) {
                                 var newID = $(this).attr('id') + i;
                                 $(this).attr('id', newID);
                             });
 
-                            $('.btnmdf').each(function(i) {
+                            $('.btnmdf').each(function (i) {
                                 var newTAR = $(this).attr('data-target') + i;
                                 $(this).attr('data-target', newTAR);
                             });
