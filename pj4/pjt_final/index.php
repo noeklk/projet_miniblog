@@ -588,7 +588,7 @@ elseif($admin == 1){
                                             <p class="php">
                                                 <button class="btnspr" type="button" value="supprimer" data-toggle="modal"
                                                     data-target="#supprModal">
-                                                    <a class="btn btn-danger">
+                                                    <a class="btn btn-danger">                            
                                                         <i class="fa fa-trash-o fa-lg"></i> Delete</a></button>
                                             </p>
                                             <!-- FIN BOUTON ACTIONNAGE MODAL SUPPRESSION -->
